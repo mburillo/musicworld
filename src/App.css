@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+
+body {
+  padding-top: 30px;  /* Dependiendo del alto de tu barra de navegación */
+}

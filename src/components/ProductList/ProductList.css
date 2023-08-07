@@ -1,0 +1,12 @@
+.card:hover {
+    transform: scale(1.05); /* Aumenta el tamaño de la tarjeta un 5% */
+    transition: transform 0.3s; /* Efecto suave de transición */
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Añade una sombra para dar sensación de elevación */
+}
+
+.card-img-top {
+    max-height: 200px; /* Establece una altura máxima */
+    width: auto; /* Asegura que la relación de aspecto de la imagen se mantenga */
+    object-fit: cover; /* Hace que la imagen cubra el espacio disponible */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+}
