@@ -6,9 +6,10 @@ import usericon from '../../assets/images/usericon.svg';
 import shoppingcarticon from '../../assets/images/shoppingcart.svg';
 import { CartContext } from '../Context/CartContext';
 import { useContext } from 'react';
-
+import { AuthContext } from '../../authContext/AuthProvider';
 const NavigationBar = () => {
     const { setShowModal } = useContext(CartContext);
+    const { isAuthenticated } = useContext(AuthContext);
     return (
         <Navbar bg="light" expand="lg" className='fixed-top'>
             <Container fluid>
@@ -44,9 +45,11 @@ const NavigationBar = () => {
                             <button onClick={() => setShowModal(true)} style={{ border: 'none', background: 'transparent' }}>
                                 <img src={shoppingcarticon} alt="shopping-cart" width="30" height="30" />
                             </button>
+                            <LinkContainer to={isAuthenticated ? "/profile" : "/login"}>
                             <Nav.Link href="#user">
                                 <img src={usericon} alt="user-icon" width="30" height="30" />
                             </Nav.Link>
+                            </LinkContainer>
                         </Nav>
                     </Col>
                 </Row>

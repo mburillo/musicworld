@@ -1,27 +1,30 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { CartContext } from '../Context/CartContext';
 import CartItem from '../CartItem/CartItem';
-import closebutton from '../../assets/images/closebutton.svg'
+import closebutton from '../../assets/images/closebutton.svg';
+
 function CartModal({ show, onClose }) {
-    const { cartItems } = useContext(CartContext);
+    const { cartItems, getTotalPrice } = useContext(CartContext);
+    const totalPrice = getTotalPrice();
+
     if (!show) return null;
     return (
         <div style={{
             position: 'fixed',
             top: 80,
             right: 0,
-            height: '100%',
+            height: 'calc(100% - 80px)',
             width: '500px',
             backgroundColor: 'white',
             zIndex: 1000,
-            overflowY: 'auto',
+            overflow: 'hidden',
             padding: '20px',
             boxShadow: '-2px 0 5px rgba(0, 0, 0, 0.3)'
         }}>
 
-<button onClick={onClose} style={{border: 'none', background: 'transparent'}}>
-  <img src={closebutton} alt="closingbutton" width={30} height={30}/>
-</button>
+            <button onClick={onClose} style={{border: 'none', background: 'transparent'}}>
+              <img src={closebutton} alt="closingbutton" width={30} height={30}/>
+            </button>
 
             <div className="p-3">
                 <div className="d-flex justify-content-between align-items-center mb-3">
@@ -29,9 +32,28 @@ function CartModal({ show, onClose }) {
                     <h6 className="mb-0 text-muted">{cartItems.length} items</h6>
                 </div>
             </div>
-            {cartItems.map(item => (
-                <CartItem key={item.id} product={item} />
-            ))}
+            
+            <div style={{
+                overflowY: 'auto',
+                height: 'calc(100% - 180px)', 
+            }}>
+                {cartItems.map(item => (
+                    <CartItem key={item.id} product={item} />
+                ))}
+            </div>
+
+            <div style={{
+                position: 'fixed',
+                bottom: 0,
+                right: 0,
+                width: '500px',
+                padding: '20px',
+                backgroundColor: 'white',
+                borderTop: '1px solid black',
+            }}>
+                <h2>Total: {totalPrice.toFixed(2)}€</h2>
+                <button className="btn btn-primary">Pagar</button>
+            </div>
         </div>
     );
 }
