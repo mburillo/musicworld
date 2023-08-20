@@ -15,6 +15,7 @@ const VerifyEmail = () => {
                 const response = await axios.post('http://localhost:8080/api/verification/verify-email', { token });
                 console.log(response)
                 if (response.data.success) {
+                    localStorage.setItem("authToken", response.data.token);
                     setSuccess(true);
                 }
             } catch (error) {
@@ -32,21 +33,21 @@ const VerifyEmail = () => {
     }
 
     return (
-        <div>
+        <div className="d-flex justify-content-center align-items-center vh-100">
             {success ? (
-                <div>
+                <div className="text-center">
                     <h1>Verificación exitosa</h1>
                     <p>Tu cuenta ha sido verificada. Serás redirigido a la página de inicio en unos momentos.</p>
                     {setTimeout(() => navigate('/'), 3000)}
                 </div>
             ) : (
-                <div>
+                <div className="text-center">
                     <h1>Error en la verificación</h1>
                     <p>Ha ocurrido un error al verificar tu cuenta. Por favor, intenta nuevamente o contacta al soporte.</p>
                 </div>
             )}
         </div>
-    );
+    );    
 };
 
 export default VerifyEmail;

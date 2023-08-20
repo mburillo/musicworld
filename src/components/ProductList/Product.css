@@ -1,0 +1,5 @@
+.card-img-top {
+    width: 100%;   /* O el ancho que prefieras */
+    height: 200px; /* Altura fija para todas las imágenes */
+    object-fit: cover; 
+}

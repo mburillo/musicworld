@@ -8,8 +8,7 @@ import Register from '../components/Register/Register';
 import VerifyEmail from '../components/VerifyEmail/VerifyEmail';
 import RecoverPassword from '../components/RecoverPassword/RecoverPassword';
 import UserProfile from '../components/UserProfile/UserProfile';
-import ProtectedRoute from './ProtectedRoute';
-import GuestRoute from './GuestRoute';
+import ProductView from '../components/ProductView/ProductView';
 export const AppRoutes = () => {
     return (
         <BrowserRouter>
@@ -17,12 +16,13 @@ export const AppRoutes = () => {
                 <NavigationBar />
                 <Routes>
                     <Route path='/' element={<ProductList />} />    
-                    <ProtectedRoute path='/profile' element={<UserProfile/>}/>
-                    <GuestRoute path='/login' element={<Login/>}/>
-                    <GuestRoute path='/forgot-password' element={<ForgotPassword/>}/>
-                    <GuestRoute path='/register' element={<Register/>}/>
+                    <Route path='/profile' element={<UserProfile/>}/>
+                    <Route path='/login' element={<Login/>}/>
+                    <Route path='/forgot-password' element={<ForgotPassword/>}/>
+                    <Route path='/register' element={<Register/>}/>
                     <Route path="/verify-email" element={<VerifyEmail />} />
                     <Route path="recover-password" element={<RecoverPassword/>}/>
+                    <Route path="/product/:id" element={<ProductView/>} />
                 </Routes>
                 <Footer/>
             </div>    

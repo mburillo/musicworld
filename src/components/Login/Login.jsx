@@ -1,24 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link,  useNavigate } from 'react-router-dom';
-import { useParams, useSearchParams, } from 'react-router-dom';
 import axios from 'axios';
+import UseGuestRoute from '../../routes/UseGuestRoute';
+import { AuthContext } from '../../authContext/AuthProvider';
 function Login() {
+  UseGuestRoute()
+
   const [formData, setFormData] = useState({
     email: '',
     password: ''
 });
+
 const navigate = useNavigate();
+const { setIsAuthenticated, setIsAdmin } = useContext(AuthContext);
 
 const handleChange = (e) => {
   const { name, value } = e.target;
   setFormData(prevState => ({ ...prevState, [name]: value }));
 }
+
 const handleLogin = async (event) => {
     event.preventDefault();        
         try {
             const response = await axios.post('http://localhost:8080/api/verification/login', formData);
-            const token = response.data;
+            const token = response.data.token;
+            console.log(response.data)
             localStorage.setItem('authToken', token);
+            setIsAuthenticated(true);
+            setIsAdmin(response.data.isAdmin);
             navigate('/')
         } catch (error) {
             console.error("Hubo un error en el registro:", error.response.data);

@@ -46,10 +46,10 @@ const NavigationBar = () => {
                                 <img src={shoppingcarticon} alt="shopping-cart" width="30" height="30" />
                             </button>
                             <LinkContainer to={isAuthenticated ? "/profile" : "/login"}>
-                            <Nav.Link href="#user">
-                                <img src={usericon} alt="user-icon" width="30" height="30" />
-                            </Nav.Link>
-                            </LinkContainer>
+    <Nav.Link>
+        <img src={usericon} alt="user-icon" width="30" height="30" />
+    </Nav.Link>
+</LinkContainer>
                         </Nav>
                     </Col>
                 </Row>

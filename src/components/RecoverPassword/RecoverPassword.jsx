@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import UseGuestRoute from '../../routes/UseGuestRoute';
 
 const RecoverPassword = () => {
+    UseGuestRoute()
     const [loading, setLoading] = useState(true);
     const [success, setSuccess] = useState(false);
     const [searchParams] = useSearchParams();

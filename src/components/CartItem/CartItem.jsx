@@ -24,10 +24,10 @@ const CartItem = ({ product }) => {
   return (
     <><hr className="my-4" /><div className="row mb-4 d-flex justify-content-between align-items-center">
       <div className="col-md-2 col-lg-2 col-xl-2">
-          <img src={product.imageUrl} className="img-fluid rounded-3" alt="Cotton T-shirt" />
+          <img src={product.imageUrl[0]} className="img-fluid rounded-3" alt="Cotton T-shirt" />
       </div>
       <div className="col-md-2 col-lg-2 col-xl-2">
-          <h6 className="text-muted">Shirt</h6>
+          <h6 className="text-muted">{product.type}</h6>
           <h6 className="text-black mb-0">{product.name}</h6>
       </div>
       <div className="col-md-4 col-lg-4 col-xl-4 d-flex">

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import UseGuestRoute from '../../routes/UseGuestRoute';
 
 function Register() {
+    UseGuestRoute()
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -22,8 +24,6 @@ function Register() {
         try {
             const response = await axios.post('http://localhost:8080/api/user/register', formData);
             const token = response.data;
-            console.log("Token recibido:", token);
-            localStorage.setItem('authToken', token);
             setRegistrationMessage("Se ha registrado con éxito. Para iniciar sesión, confirme en el correo que se ha enviado.");
         } catch (error) {
             console.error("Hubo un error en el registro:", error.response.data);
