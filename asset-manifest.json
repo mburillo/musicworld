@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/musicworld/static/css/main.9d8f896c.css",
+    "main.js": "/musicworld/static/js/main.f108c166.js",
+    "static/js/787.60e6cc5c.chunk.js": "/musicworld/static/js/787.60e6cc5c.chunk.js",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/musicworld/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/fontawesome-webfont.eot": "/musicworld/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/musicworld/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/musicworld/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/musicworld/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "static/media/logo.svg": "/musicworld/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/github.svg": "/musicworld/static/media/github.5531be85d7a8d6f333e5c7136944a022.svg",
+    "static/media/twitter.svg": "/musicworld/static/media/twitter.aedcb58ce5a258131a169832fdbd34dd.svg",
+    "static/media/shoppingcart.svg": "/musicworld/static/media/shoppingcart.09d1d9e27cd62c68bf401bc8cb9fc3b2.svg",
+    "static/media/linkedin.svg": "/musicworld/static/media/linkedin.c7edb0f3cd867a03828551d841262eb6.svg",
+    "index.html": "/musicworld/index.html",
+    "static/media/usericon.svg": "/musicworld/static/media/usericon.1d447e6ea1943f95a62762329f4cbccd.svg",
+    "static/media/facebook.svg": "/musicworld/static/media/facebook.a1fbd953fcb2d13f1c69dab85106d147.svg",
+    "static/media/plus.svg": "/musicworld/static/media/plus.a495898368ab609c4ec001ee700ca436.svg",
+    "static/media/closebutton.svg": "/musicworld/static/media/closebutton.0f0fb6caaf346dfefcbe670debf4b964.svg",
+    "static/media/minus.svg": "/musicworld/static/media/minus.3743dad982dc3a4f30cd16acec677549.svg",
+    "main.9d8f896c.css.map": "/musicworld/static/css/main.9d8f896c.css.map",
+    "main.f108c166.js.map": "/musicworld/static/js/main.f108c166.js.map",
+    "787.60e6cc5c.chunk.js.map": "/musicworld/static/js/787.60e6cc5c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9d8f896c.css",
+    "static/js/main.f108c166.js"
+  ]
+}
