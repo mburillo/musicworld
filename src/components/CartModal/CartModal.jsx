@@ -2,9 +2,13 @@ import React, { useContext } from 'react';
 import { CartContext } from '../Context/CartContext';
 import CartItem from '../CartItem/CartItem';
 import closebutton from '../../assets/images/closebutton.svg';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../authContext/AuthProvider';
+import { Link } from 'react-router-dom';
 
 function CartModal({ show, onClose }) {
     const { cartItems, getTotalPrice } = useContext(CartContext);
+    const { isAuthenticated } = useContext(AuthContext);
     const totalPrice = getTotalPrice();
 
     if (!show) return null;
@@ -52,7 +56,12 @@ function CartModal({ show, onClose }) {
                 borderTop: '1px solid black',
             }}>
                 <h2>Total: {totalPrice.toFixed(2)}€</h2>
-                <button className="btn btn-primary">Pagar</button>
+                <Link 
+    to={isAuthenticated ? '/payment' : '/login'} 
+    className="btn btn-primary"
+>
+    Pagar
+</Link>
             </div>
         </div>
     );

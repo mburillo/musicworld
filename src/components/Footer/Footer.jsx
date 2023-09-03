@@ -3,10 +3,19 @@ import facebook from '../../assets/images/facebook.svg'
 import twitter from '../../assets/images/twitter.svg'
 import github from '../../assets/images/github.svg'
 import linkedin from '../../assets/images/linkedin.svg'
-
+import './Footer.css';
 const Footer = () => {
+    const socials = [
+        { src: facebook, alt: 'facebook', color: '#3b5998' },
+        { src: twitter, alt: 'twitter', color: '#55acee' },
+        { src: twitter, alt: 'google', color: '#dd4b39' },  // NOTA: Asegúrate de usar el ícono correcto aquí.
+        { src: twitter, alt: 'instagram', color: '#ac2bac' }, // NOTA: Asegúrate de usar el ícono correcto aquí.
+        { src: linkedin, alt: 'linkedin', color: '#0082ca' },
+        { src: github, alt: 'github', color: '#333333' }
+    ];
+
     return (
-        <div>
+        <div className="footer">
             <footer className="text-center text-lg-start text-white" style={{ backgroundColor: "#929fba" }}>
                 <div className="container p-4 pb-0">
                     <section>
@@ -37,44 +46,11 @@ const Footer = () => {
                             <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
                                 <h6 className="text-uppercase mb-4 font-weight-bold">Follow us</h6>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', maxWidth: '150px' }}>
-    {/* Primera fila */}
-    <a className="btn btn-primary btn-floating m-1" 
-        style={{ ...btnCommonStyle, backgroundColor: "#3b5998" }} 
-        href="#!" 
-        role="button">
-        <img src={facebook} alt="facebook" style={imgStyle} />
-    </a>
-    <a className="btn btn-primary btn-floating m-1" 
-        style={{ ...btnCommonStyle, backgroundColor: "#55acee" }} 
-        href="#!" 
-        role="button">
-        <img src={twitter} alt="twitter" style={imgStyle} />
-    </a>
-    <a className="btn btn-primary btn-floating m-1" 
-        style={{ ...btnCommonStyle, backgroundColor: "#dd4b39" }} 
-        href="#!" 
-        role="button">
-        <img src={twitter} alt="google" style={imgStyle} />
-    </a>
-    {/* Segunda fila */}
-    <a className="btn btn-primary btn-floating m-1" 
-        style={{ ...btnCommonStyle, backgroundColor: "#ac2bac" }} 
-        href="#!" 
-        role="button">
-        <img src={twitter} alt="instagram" style={imgStyle} />
-    </a>
-    <a className="btn btn-primary btn-floating m-1" 
-        style={{ ...btnCommonStyle, backgroundColor: "#0082ca" }} 
-        href="#!" 
-        role="button">
-        <img src={linkedin} alt="linkedin" style={imgStyle} />
-    </a>
-    <a className="btn btn-primary btn-floating m-1" 
-        style={{ ...btnCommonStyle, backgroundColor: "#333333" }} 
-        href="#!" 
-        role="button">
-        <img src={github} alt="github" style={imgStyle} />
-    </a>
+                                {socials.map((social, index) => (
+                        <a key={index} className="btn btn-primary btn-floating m-1" style={{ ...btnCommonStyle, backgroundColor: social.color }} href="#!" role="button">
+                            <img src={social.src} alt={social.alt} style={imgStyle} />
+                        </a>
+                    ))}
 </div>
 
 

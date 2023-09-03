@@ -9,6 +9,7 @@ function ProductList() {
     console.log("ProductList montado");
     const [products, setProducts] = useState([]);
     const { setCartItems } = useContext(CartContext);
+    const [hasMore, setHasMore] = useState(true);
     const addToCart = (product) => {
         setCartItems(prevItems => [...prevItems, product]);
       };
@@ -17,12 +18,17 @@ function ProductList() {
 
       useEffect(() => { 
         const fetchData = async () => {
-            if (!products.length || page > 0) { 
+            if (hasMore && (!products.length || page > 0)) { 
                 try {
-                    const response = await axios.get(`http://localhost:8080/api/products?page=${page}&limit=6`);
+                    const response = await axios.get(`https://musicworld.onrender.com/api/products?page=${page}&limit=6`);
                     const newData = response.data.filter(
                         newProduct => !products.some(product => product.id === newProduct.id)
                     );
+    
+                    if (response.data.length < 6) { // Si obtenemos menos de 6 productos, probablemente no haya más.
+                        setHasMore(false);
+                    }
+    
                     setProducts(currentProducts => [...currentProducts, ...newData]);
                 } catch (error) {
                     console.error("Error fetching products:", error);
@@ -32,17 +38,15 @@ function ProductList() {
         fetchData();
     }, [page, products]);
     
-      
-      useEffect(() => {
+    useEffect(() => {
         const handleScroll = () => {
-            if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 200) {
+            if (hasMore && window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 200) {
                 setPage(prevPage => prevPage + 1);
             }
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-    
+    }, [hasMore]); 
     
     return (
         <div className="container mt-5">

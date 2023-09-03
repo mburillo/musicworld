@@ -61,7 +61,7 @@ function AddProducts() {
                     CD: '/api/products/music-format',
                     VINYL: '/api/products/music-format'
                 };
-                await axios.post("http://localhost:8080"+endpointMap[productType], formData, {
+                await axios.post("https://musicworld.onrender.com"+endpointMap[productType], formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -114,10 +114,10 @@ function AddProducts() {
     useEffect(() => {
         const fetchProductData = async () => {
             try {
-                const typeResponse = await axios.get('http://localhost:8080/api/products/product-types');
-                const sizeResponse = await axios.get('http://localhost:8080/api/products/product-sizes');
-                const genreResponse = await axios.get('http://localhost:8080/api/products/product-genres');
-                const colorResponse = await axios.get('http://localhost:8080/api/products/product-colors');
+                const typeResponse = await axios.get('https://musicworld.onrender.com/api/products/product-types');
+                const sizeResponse = await axios.get('https://musicworld.onrender.com/api/products/product-sizes');
+                const genreResponse = await axios.get('https://musicworld.onrender.com/api/products/product-genres');
+                const colorResponse = await axios.get('https://musicworld.onrender.com/api/products/product-colors');
                 setTypes(typeResponse.data);
                 setSizes(sizeResponse.data);
                 setGenres(genreResponse.data);

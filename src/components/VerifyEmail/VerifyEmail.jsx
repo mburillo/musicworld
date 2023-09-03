@@ -12,7 +12,7 @@ const VerifyEmail = () => {
     useEffect(() => {
         const verify = async () => {
             try {
-                const response = await axios.post('http://localhost:8080/api/verification/verify-email', { token });
+                const response = await axios.post('https://musicworld.onrender.com/api/verification/verify-email', { token });
                 console.log(response)
                 if (response.data.success) {
                     localStorage.setItem("authToken", response.data.token);

@@ -1,7 +1,3 @@
-.product {
-    height: 100vh;
-}
-
 .product .row {
     align-items: center; 
     min-height: 80vh;   
@@ -15,4 +11,5 @@
 .carousel-control-next-icon {
     background-color: black;
 }
+
 

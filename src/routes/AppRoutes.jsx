@@ -9,10 +9,15 @@ import VerifyEmail from '../components/VerifyEmail/VerifyEmail';
 import RecoverPassword from '../components/RecoverPassword/RecoverPassword';
 import UserProfile from '../components/UserProfile/UserProfile';
 import ProductView from '../components/ProductView/ProductView';
+import CartModal from '../components/CartModal/CartModal';
+import { CartContext } from '../components/Context/CartContext';
+import Payment from '../components/Payment/Payment';
+import Layout from '../components/Layout/Layout';
 export const AppRoutes = () => {
     return (
         <BrowserRouter>
             <div>
+                <Layout>
                 <NavigationBar />
                 <Routes>
                     <Route path='/' element={<ProductList />} />    
@@ -23,8 +28,11 @@ export const AppRoutes = () => {
                     <Route path="/verify-email" element={<VerifyEmail />} />
                     <Route path="recover-password" element={<RecoverPassword/>}/>
                     <Route path="/product/:id" element={<ProductView/>} />
+                    <Route path="/payment" element={<Payment/>}/>
                 </Routes>
+                <CartModal />
                 <Footer/>
+                </Layout>
             </div>    
         </BrowserRouter>
     );
