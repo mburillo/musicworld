@@ -11,7 +11,7 @@ function ForgotPassword() {
     
     try {
       // Hacemos la solicitud POST al servidor con el correo electrónico del usuario
-      const response = await axios.post('https://musicworld.onrender.com/api/verification/forgot-password', { email });
+      const response = await axios.post('https://musicworldspring-production.up.railway.app/api/verification/forgot-password', { email });
 
       // Si la operación fue exitosa, mostramos un mensaje al usuario
       setMessage("If that email address is in our system, we've just sent you password reset instructions.");

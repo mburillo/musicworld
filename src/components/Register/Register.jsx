@@ -22,7 +22,7 @@ function Register() {
     const handleRegister = async (event) => {
         event.preventDefault();        
         try {
-            const response = await axios.post('http://localhost:8080/api/user/register', formData);
+            const response = await axios.post('https://musicworldspring-production.up.railway.app/api/user/register', formData);
             const token = response.data;
             setRegistrationMessage("Se ha registrado con éxito. Para iniciar sesión, confirme en el correo que se ha enviado.");
         } catch (error) {

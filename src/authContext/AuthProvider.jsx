@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
-            axios.post('http://localhost:8080/api/verification/verify-token', { token: token })
+            axios.post('https://musicworldspring-production.up.railway.app/api/verification/verify-token', { token: token })
                 .then(response => {
                     console.log(response.data)
                     if (response.data.isValid) {

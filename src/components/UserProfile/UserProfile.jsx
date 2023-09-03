@@ -25,7 +25,7 @@ function UserProfile() {
                     }
                   };
                 console.log(`Authorization header: Bearer ${token}`);
-                const response = await axios.get('https://musicworld.onrender.com/api/user/profile', config);
+                const response = await axios.get('https://musicworldspring-production.up.railway.app/api/user/profile', config);
                 setUser(response.data);
             } catch (error) {
                 console.error("Error fetching user data:", error);

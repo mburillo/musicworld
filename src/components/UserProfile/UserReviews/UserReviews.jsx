@@ -9,7 +9,7 @@ function UserReviews() {
         const fetchUserReviews = async () => {
             try {
                 const userToken = localStorage.getItem('authToken');
-                const response = await axios.get('https://musicworld.onrender.com/api/user/reviews', {
+                const response = await axios.get('https://musicworldspring-production.up.railway.app/api/user/reviews', {
                     headers: {
                         'Authorization': `Bearer ${userToken}`
                     }

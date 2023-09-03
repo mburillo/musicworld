@@ -42,7 +42,7 @@ function ProductView() {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`https://musicworld.onrender.com/api/products/${id}`);
+                const response = await axios.get(`https://musicworldspring-production.up.railway.app/api/products/${id}`);
                 setProduct(response.data);
             } catch (error) {
                 console.error("Error fetching product:", error);
@@ -55,7 +55,7 @@ function ProductView() {
 
     const fetchReviews = async () => {
         try {
-            const response = await axios.get(`https://musicworld.onrender.com/api/reviews/${id}?page=${reviewPage}&size=20&sort=${sortOption}`);
+            const response = await axios.get(`https://musicworldspring-production.up.railway.app/api/reviews/${id}?page=${reviewPage}&size=20&sort=${sortOption}`);
 
             if (response.data.length < 20) {
                 setHasMoreReviews(false);
@@ -82,7 +82,7 @@ function ProductView() {
     const handleAddReview = async () => {
         try {
             const token = localStorage.getItem('authToken');
-            await axios.post('https://musicworld.onrender.com/api/reviews', { content: newReview, rating: rating, productId: id }, {
+            await axios.post('https://musicworldspring-production.up.railway.app/api/reviews', { content: newReview, rating: rating, productId: id }, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }

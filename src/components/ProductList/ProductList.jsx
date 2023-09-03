@@ -20,7 +20,11 @@ function ProductList() {
         const fetchData = async () => {
             if (hasMore && (!products.length || page > 0)) { 
                 try {
-                    const response = await axios.get(`https://musicworld.onrender.com/api/products?page=${page}&limit=6`);
+                    const response = await axios.get(`https://musicworldspring-production.up.railway.app/api/products?page=${page}&limit=6`, {
+                        headers: {
+                          'Access-Control-Allow-Origin': 'http://localhost:3000',
+                        },
+                      });
                     const newData = response.data.filter(
                         newProduct => !products.some(product => product.id === newProduct.id)
                     );
