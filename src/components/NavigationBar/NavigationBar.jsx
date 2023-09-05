@@ -39,7 +39,7 @@ const NavigationBar = () => {
                     </Col>
                     <Col xs={4} className="d-flex justify-content-end">
                         <Form inline className="mr-2">
-                            <FormControl type="text" placeholder="Buscar" className="mr-sm-2" />
+                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                         </Form>
                         <Nav>
                             <button onClick={() => setShowModal(true)} style={{ border: 'none', background: 'transparent' }}>
