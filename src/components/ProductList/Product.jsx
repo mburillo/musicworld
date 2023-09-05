@@ -20,7 +20,7 @@ const Product = ({ product }) => {
             <h5 className="card-title">{product.name}</h5>
             <p className="card-text">{product.description}</p>
             <p className="card-text">${product.price.toFixed(2)}</p>
-            <button className="btn btn-primary" onClick={handleAddToCart}>Añadir al carrito</button>
+            <button className="btn btn-primary" onClick={handleAddToCart}>Add to cart</button>
         </div>
     </div>
 </div>

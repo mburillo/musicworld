@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './ProductList.css';
 import { CartContext } from '../Context/CartContext';
 import axios from 'axios';
-
 function ProductList() {
     console.log("ProductList montado");
     const [products, setProducts] = useState([]);
@@ -20,7 +19,7 @@ function ProductList() {
         const fetchData = async () => {
             if (hasMore && (!products.length || page > 0)) { 
                 try {
-                    const response = await axios.get(`https://musicworldspring-production.up.railway.app/api/products?page=${page}&limit=6`,{ withCredentials: true }
+                    const response = await axios.get(`https://musicworldspring-production.up.railway.app/api/products?page=${page}&limit=6`
                       );
                     const newData = response.data.filter(
                         newProduct => !products.some(product => product.id === newProduct.id)

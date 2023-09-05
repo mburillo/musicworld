@@ -60,7 +60,7 @@ function CartModal({ show, onClose }) {
     to={isAuthenticated ? '/payment' : '/login'} 
     className="btn btn-primary"
 >
-    Pagar
+    Pay
 </Link>
             </div>
         </div>

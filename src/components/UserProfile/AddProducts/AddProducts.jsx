@@ -82,21 +82,21 @@ function AddProducts() {
     const validateFields = () => {
         const errors = [];
     
-        if (!name) errors.push("El nombre es obligatorio.");
-        if (!description) errors.push("La descripción es obligatoria.");
-        if (!price) errors.push("El precio es obligatorio.");
-        if (!productType) errors.push("El tipo de producto es obligatorio.");
+        if (!name) errors.push("The name field is required.");
+        if (!description) errors.push("The description is required");
+        if (!price) errors.push("The price is required.");
+        if (!productType) errors.push("The product's type is required.");
     
         switch (productType) {
             case "CD":
             case "VINYL":
-                if (!releaseYear) errors.push("El año de lanzamiento es obligatorio.");
-                if (!author) errors.push("El autor es obligatorio.");
-                if (!genre) errors.push("El género es obligatorio.");
+                if (!releaseYear) errors.push("The release year is required.");
+                if (!author) errors.push("The author ir required.");
+                if (!genre) errors.push("The genre is required.");
                 break;
             case "SHIRT":
-                if (!selectedSizes.length) errors.push("Debe seleccionar al menos una talla.");
-                if (!color) errors.push("El color es obligatorio.");
+                if (!selectedSizes.length) errors.push("You must select at least one size.");
+                if (!color) errors.push("The color is required.");
                 break;
             default:
                 break;
@@ -131,47 +131,47 @@ function AddProducts() {
 
     return (
         <div className="container mt-5">
-            <h3 className="text-center mb-4">Añadir Producto</h3>
+            <h3 className="text-center mb-4">Add product</h3>
             <div className="row">
                 <div className="col-md-6 offset-md-3">
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label className="form-label">Tipo</label>
+                            <label className="form-label">Type</label>
                             <select className="form-control" value={productType} onChange={(e) => setProductType(e.target.value)}>
-                                <option value="">Selecciona un tipo</option>
+                                <option value="">Select a type</option>
                                 {types.map(type => <option key={type} value={type}>{type}</option>)}
                             </select>
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Nombre</label>
+                            <label className="form-label">Name</label>
                             <input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)} />
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Descripción</label>
+                            <label className="form-label">Description</label>
                             <textarea className="form-control" value={description} onChange={e => setDescription(e.target.value)}></textarea>
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Precio</label>
+                            <label className="form-label">Price</label>
                             <input type="number" step="0.01" className="form-control" value={price} onChange={e => setPrice(e.target.value)} />
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Imagenes promocionales</label>
+                            <label className="form-label">Promotional images</label>
                             <input type="file" className="form-control" multiple onChange={handleFileChange} />
                         </div>
                         {productType === "CD" || productType === "VINYL" ? (
                             <>
                                 <div className="mb-3">
-                                    <label className="form-label">Año de lanzamiento</label>
+                                    <label className="form-label">Release year</label>
                                     <input type="number" className="form-control" value={releaseYear} onChange={e => setReleaseYear(e.target.value)} />
                                 </div>
                                 <div className="mb-3">
-                                    <label className="form-label">Autor</label>
+                                    <label className="form-label">Author</label>
                                     <input type="text" className="form-control" value={author} onChange={e => setAuthor(e.target.value)} />
                                 </div>
                                 <div className="mb-3">
-                                    <label className="form-label">Género</label>
+                                    <label className="form-label">Genre</label>
                                     <select className="form-control" value={genre} onChange={e => setGenre(e.target.value)}>
-                                        <option value="">Selecciona un género</option>
+                                        <option value="">Select a genre</option>
                                         {genres.map(genre => <option key={genre} value={genre}>{genre}</option>)}
                                     </select>
                                 </div>
@@ -180,7 +180,7 @@ function AddProducts() {
                         {productType === "SHIRT" ? (
                             <>
                                 <div className="mb-3">
-                                    <label className="form-label">Tallas disponibles</label>
+                                    <label className="form-label">Available sizes</label>
                                     <select multiple className="form-control" value={selectedSizes} onChange={e => setSelectedSizes([...e.target.options].filter(option => option.selected).map(option => option.value))}>
                                         {sizes.map(size => <option key={size} value={size}>{size}</option>)}
                                     </select>
@@ -188,14 +188,14 @@ function AddProducts() {
                                 <div className="mb-3">
                                     <label className="form-label">Color</label>
                                     <select className="form-control" value={color} onChange={e => setColor(e.target.value)}>
-                                        <option value="">Selecciona un color</option>
+                                        <option value="">Select a color</option>
                                         {colors.map(color => <option key={color} value={color}>{color}</option>)}
                                     </select>
                                 </div>
                             </>
                         ) : null}
                         <div className="text-center">
-                            <button type="submit" className="btn btn-primary">Añadir</button>
+                            <button type="submit" className="btn btn-primary">Add</button>
                         </div>
                     </form>
                     {errorMessages.length > 0 && (

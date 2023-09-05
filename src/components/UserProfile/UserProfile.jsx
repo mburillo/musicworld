@@ -61,10 +61,10 @@ function UserProfile() {
             <div className="row mt-5">
                 <div className="col-md-12">
                     <ul className="list-group list-group-horizontal justify-content-center">
-                        <li className="list-group-item flex-fill text-center"><a href="#" onClick={() => setView('orders')}>Ver Pedidos</a></li>
-                        <li className="list-group-item flex-fill text-center"><a href="#" onClick={() => setView('reviews')}>Ver Reseñas</a></li>
-                        <li className="list-group-item flex-fill text-center"><a href="#" onClick={() => setView('settings')}>Configuración</a></li>
-                        {user.admin && <li className="list-group-item flex-fill text-center"><a href="#" onClick={() => setView('add-product')}>Añadir Productos</a></li>}
+                        <li className="list-group-item flex-fill text-center"><a href="#" onClick={() => setView('orders')}>Orders</a></li>
+                        <li className="list-group-item flex-fill text-center"><a href="#" onClick={() => setView('reviews')}>Reviews</a></li>
+                        <li className="list-group-item flex-fill text-center"><a href="#" onClick={() => setView('settings')}>Settings</a></li>
+                        {user.admin && <li className="list-group-item flex-fill text-center"><a href="#" onClick={() => setView('add-product')}>Add products</a></li>}
                     </ul>
                 </div>
                 <div className="col-md-12 mt-4">

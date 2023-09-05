@@ -15,7 +15,7 @@ import Payment from '../components/Payment/Payment';
 import Layout from '../components/Layout/Layout';
 export const AppRoutes = () => {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename='/musicworld'>
             <div>
                 <Layout>
                 <NavigationBar />

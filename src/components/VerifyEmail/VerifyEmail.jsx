@@ -36,14 +36,14 @@ const VerifyEmail = () => {
         <div className="d-flex justify-content-center align-items-center vh-100">
             {success ? (
                 <div className="text-center">
-                    <h1>Verificación exitosa</h1>
-                    <p>Tu cuenta ha sido verificada. Serás redirigido a la página de inicio en unos momentos.</p>
+                    <h1>Successful verification</h1>
+                    <p>Your account has been verified. You will be redirected in a few seconds</p>
                     {setTimeout(() => navigate('/'), 3000)}
                 </div>
             ) : (
                 <div className="text-center">
-                    <h1>Error en la verificación</h1>
-                    <p>Ha ocurrido un error al verificar tu cuenta. Por favor, intenta nuevamente o contacta al soporte.</p>
+                    <h1>An error has occurred</h1>
+                    <p>We could not verify your account. Please try again or contact our customer support</p>
                 </div>
             )}
         </div>

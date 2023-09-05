@@ -43,7 +43,7 @@ function ForgotPassword() {
         <div className="mb-3 text-center">
           <Link to="/login">Remember your password?</Link>
         </div>
-        {message && <div className="text-center mt-3">{message}</div>} {/* Mostramos el mensaje si está presente */}
+        {message && <div className="text-center mt-3">{message}</div>} 
       </form>
     </div>
   );
