@@ -22,10 +22,10 @@ const NavigationBar = () => {
                                     <Nav.Link>CDs</Nav.Link>
                                 </LinkContainer>
                                 <LinkContainer to="/vinilos">
-                                    <Nav.Link>Vinilos</Nav.Link>
+                                    <Nav.Link>Vinyl</Nav.Link>
                                 </LinkContainer>
                                 <LinkContainer to="/camisetas">
-                                    <Nav.Link>Camisetas</Nav.Link>
+                                    <Nav.Link>Shirts</Nav.Link>
                                 </LinkContainer>
                             </Nav>
                         </Navbar.Collapse>
