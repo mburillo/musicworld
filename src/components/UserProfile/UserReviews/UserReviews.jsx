@@ -27,7 +27,7 @@ function UserReviews() {
 
     return (
         <div className="container mt-5">
-            <h3 className="text-center mb-4">Mis Reviews</h3>
+            <h3 className="text-center mb-4">My reviews</h3>
             <div className="row">
                 {reviews.map((review, index) => (
                     <Review key={index} review={review} />

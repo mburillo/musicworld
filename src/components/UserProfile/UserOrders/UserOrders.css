@@ -1,0 +1,50 @@
+.order-list {
+    list-style: none;
+    padding: 0;
+}
+
+.order-item {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.order-status {
+    display: flex;
+    align-items: center;
+}
+
+.status-icon, .status-line {
+    flex: 1;
+    text-align: center;
+}
+
+.status-icon {
+    padding: 10px;
+    color: #ccc;
+    border-radius: 50%;
+    background: #f4f4f4;
+    position: relative;
+    z-index: 1;
+}
+
+.status-icon.active {
+    color: green;
+    background: #e4f9e4;
+}
+
+.status-icon i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.status-line {
+    height: 2px;
+    background: #ccc;
+    z-index: 0;
+}
+
+.custom-text-right {
+    text-align: right;
+}

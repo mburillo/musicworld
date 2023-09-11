@@ -18,14 +18,14 @@ function ProductList() {
       useEffect(() => { 
         const fetchData = async () => {
             if (hasMore && (!products.length || page > 0)) { 
-                try {
-                    const response = await axios.get(`https://musicworldspring-production.up.railway.app/api/products?page=${page}&limit=6`
+                try {//https://musicworldspring-production.up.railway.app
+                    const response = await axios.get(`http://localhost:8080/api/products?page=${page}&limit=6`
                       );
                     const newData = response.data.filter(
                         newProduct => !products.some(product => product.id === newProduct.id)
                     );
     
-                    if (response.data.length < 6) { // Si obtenemos menos de 6 productos, probablemente no haya más.
+                    if (response.data.length < 6) {
                         setHasMore(false);
                     }
     

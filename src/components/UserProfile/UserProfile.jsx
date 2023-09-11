@@ -16,16 +16,12 @@ function UserProfile() {
         const fetchUserData = async () => {
             try {
                 const token = localStorage.getItem("authToken");
-                console.log(token)
                 const config = {
                     headers: {
-                      "Access-Control-Allow-Origin": "*",
-                      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
                       "Authorization": 'Bearer '+ token
                     }
-                  };
-                console.log(`Authorization header: Bearer ${token}`);
-                const response = await axios.get('https://musicworldspring-production.up.railway.app/api/user/profile', config);
+                  };//https://musicworldspring-production.up.railway.app
+                const response = await axios.get('http://localhost:8080/api/user/profile', config);
                 setUser(response.data);
             } catch (error) {
                 console.error("Error fetching user data:", error);

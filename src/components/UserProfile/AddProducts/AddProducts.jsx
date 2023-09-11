@@ -69,9 +69,6 @@ function AddProducts() {
                 
                 console.log("Producto añadido con éxito!");
     
-                // Restablecer campos del formulario si es necesario
-                // ...
-    
             } catch (error) {
                 console.error("Error al añadir producto:", error);
             }
@@ -106,7 +103,6 @@ function AddProducts() {
     };
     
 
-    // Manejador para el cambio de archivos
     const handleFileChange = (e) => {
         console.log(e.target.files)
         setImageFiles([...e.target.files]);

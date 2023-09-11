@@ -13,6 +13,7 @@ import CartModal from '../components/CartModal/CartModal';
 import { CartContext } from '../components/Context/CartContext';
 import Payment from '../components/Payment/Payment';
 import Layout from '../components/Layout/Layout';
+import ProcessPayment from '../components/ProcessPayment/ProcessPayment';
 export const AppRoutes = () => {
     return (
         <BrowserRouter basename='/musicworld'>
@@ -29,6 +30,7 @@ export const AppRoutes = () => {
                     <Route path="recover-password" element={<RecoverPassword/>}/>
                     <Route path="/product/:id" element={<ProductView/>} />
                     <Route path="/payment" element={<Payment/>}/>
+                    <Route path="/process-payment" element={<ProcessPayment/>}/>
                 </Routes>
                 <CartModal />
                 <Footer/>
