@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/musicworld/static/css/main.9d8f896c.css",
-    "main.js": "/musicworld/static/js/main.913f0b4e.js",
+    "main.css": "/musicworld/static/css/main.0cc47d51.css",
+    "main.js": "/musicworld/static/js/main.65be0d07.js",
     "static/js/787.60e6cc5c.chunk.js": "/musicworld/static/js/787.60e6cc5c.chunk.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/musicworld/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/musicworld/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
@@ -20,12 +20,14 @@
     "static/media/closebutton.svg": "/musicworld/static/media/closebutton.0f0fb6caaf346dfefcbe670debf4b964.svg",
     "static/media/minus.svg": "/musicworld/static/media/minus.3743dad982dc3a4f30cd16acec677549.svg",
     "static/media/email.svg": "/musicworld/static/media/email.8cd101eb5f737c27e91052a56f1a5dec.svg",
-    "main.9d8f896c.css.map": "/musicworld/static/css/main.9d8f896c.css.map",
-    "main.913f0b4e.js.map": "/musicworld/static/js/main.913f0b4e.js.map",
+    "static/media/left-arrow.svg": "/musicworld/static/media/left-arrow.f52adc26d1695c1b88bcb0f15fa48fc9.svg",
+    "static/media/right-arrow.svg": "/musicworld/static/media/right-arrow.5df2fe6d4d81999847cb601c6f6b4649.svg",
+    "main.0cc47d51.css.map": "/musicworld/static/css/main.0cc47d51.css.map",
+    "main.65be0d07.js.map": "/musicworld/static/js/main.65be0d07.js.map",
     "787.60e6cc5c.chunk.js.map": "/musicworld/static/js/787.60e6cc5c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9d8f896c.css",
-    "static/js/main.913f0b4e.js"
+    "static/css/main.0cc47d51.css",
+    "static/js/main.65be0d07.js"
   ]
 }
