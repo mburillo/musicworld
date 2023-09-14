@@ -22,7 +22,6 @@ import UpdatePassword from '../components/UpdatePassword/UpdatePassword';
 export const AppRoutes = () => {
     return (
         <HashRouter>
-            <div>
                 <Layout>
                 <NavigationBar />
                 <Routes>
@@ -44,8 +43,7 @@ export const AppRoutes = () => {
                 </Routes>
                 <CartModal />
                 <Footer/>
-                </Layout>
-            </div>    
+                </Layout>  
         </HashRouter>
     );
 };
