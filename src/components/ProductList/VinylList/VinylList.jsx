@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import Product from './Product';
+import Product from '../Product';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './ProductList.css';
-import { CartContext } from '../Context/CartContext';
+import '../ProductList.css';
+import { CartContext } from '../../Context/CartContext';
 import axios from 'axios';
-import { ReactComponent as RightArrow } from '../../assets/images/right-arrow.svg';
-import { ReactComponent as LeftArrow } from '../../assets/images/left-arrow.svg';
-import BigCarousel from './BigCarousel/BigCarousel';
-import SmallCarousel from './SmallCarousel/SmallCarousel';
+import { ReactComponent as RightArrow } from '../../../assets/images/right-arrow.svg';
+import { ReactComponent as LeftArrow } from '../../../assets/images/left-arrow.svg';
+import BigCarousel from '../BigCarousel/BigCarousel';
+import SmallCarousel from '../SmallCarousel/SmallCarousel';
 import InfiniteScroll from 'react-infinite-scroller';
 import { debounce } from 'lodash';
-function ProductList() {
-
+function VinylList() {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
     const [products, setProducts] = useState([]);
     const { setCartItems } = useContext(CartContext);
     const [hasMore, setHasMore] = useState(true);
@@ -23,17 +21,20 @@ function ProductList() {
     const mostProductsCarouselLimit = 15;
     const [carouselData, setCarouselData] = useState([]);
     const [limit, setLimit] = useState(5);
+    const currentPageRef = useRef(1);
+    const [genres, setGenres] = useState([]);
     const [filters, setFilters] = useState({
         searchText: "",
         minPrice: null,
-        maxPrice: null
+        maxPrice: null,
+        genre: "",
+        maxYear: null,
+        minYear: null
     });
-    const currentPageRef = useRef(1);
     useEffect(() => {
         const fetchCarouselData = async () => {
             try {
-                console.log(API_BASE_URL)
-                const response = await axios.get(`${API_BASE_URL}/api/promotional-images?limit=${limit}`);
+                const response = await axios.get(`${API_BASE_URL}/api/promotional-images/vinyls?limit=${limit}`);
                 setCarouselData(response.data);
             } catch (error) {
                 console.error('Error:', error);
@@ -48,7 +49,7 @@ function ProductList() {
     const loadMore = async () => {
         try {
             const pageToLoad = currentPageRef.current;
-            const response = await axios.get(`${API_BASE_URL}/api/products`, {
+            const response = await axios.get(`${API_BASE_URL}/api/vinyls`, {
                 params: {
                     page: pageToLoad,
                     limit: 6,
@@ -66,17 +67,18 @@ function ProductList() {
             if (response.data.length < 6) {
                 setHasMore(false);
             }
+
             currentPageRef.current += 1;
+
         } catch (error) {
             console.error("Error fetching products:", error);
         }
     };
 
-
     useEffect(() => {
         const fetchCarouselData = async () => {
             try {
-                const response = await axios.get(`${API_BASE_URL}/api/products/latest-products?limit=${latestCarouselLimit}`);
+                const response = await axios.get(`${API_BASE_URL}/api/vinyls/latest-vinyls?limit=${latestCarouselLimit}`);
                 setLatestProductsCarousel(response.data);
             } catch (error) {
                 console.error('Error:', error);
@@ -89,7 +91,7 @@ function ProductList() {
     useEffect(() => {
         const fetchCarouselData = async () => {
             try {
-                const response = await axios.get(`${API_BASE_URL}/api/products/most-sold-products?limit=${mostProductsCarouselLimit}`);
+                const response = await axios.get(`${API_BASE_URL}/api/cds/most-sold-vinyls?limit=${mostProductsCarouselLimit}`);
                 setMostSoldProducts(response.data);
                 console.log(response.data)
             } catch (error) {
@@ -122,6 +124,18 @@ function ProductList() {
         };
     }, [filters]);
 
+    useEffect(() => {
+        const fetchGenres = async () => {
+            try {
+                const genreResponse = await axios.get(`${API_BASE_URL}/api/products/product-genres`);
+                setGenres(genreResponse.data);
+            } catch (error) {
+                console.error("Error fetching product data:", error);
+            }
+        };
+        fetchGenres();
+    }, []);
+
     return (
         <>
             {carouselData.length === 0 ? (
@@ -138,12 +152,11 @@ function ProductList() {
             ) : (
                 <>
                     <BigCarousel carouselData={carouselData} />
-                    <h2 className='text-center mt-5'>Our latest products</h2>
+                    <h2 className='text-center mt-5'>Our latest vinyls</h2>
                     <SmallCarousel items={latestProductsCarousel} />
-                    <h2 className='text-center mt-5'>Our most sold products</h2>
+                    <h2 className='text-center mt-5'>Our most sold vinyls</h2>
                     <SmallCarousel items={mostSoldProducts} />
                     <div className="container mt-5">
-                        <h2 className='text-center mb-3'>All of our products</h2>
                         <div className="filters row mb-3">
                             <div className="col">
                                 <input
@@ -172,8 +185,32 @@ function ProductList() {
                                     onChange={(e) => updateFilter("maxPrice", e.target.value)}
                                 />
                             </div>
-                        </div>
+                            <div className="col">
+                                <select className="form-control" value={filters.genre} onChange={e => updateFilter("genre", e.target.value)}>
+                                    <option value="">Select a genre</option>
+                                    {genres.map(genre => <option key={genre} value={genre}>{genre}</option>)}
+                                </select>
+                            </div>
+                            <div className="col">
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    placeholder="Min year of release"
+                                    value={filters.minYear || ""}
+                                    onChange={(e) => updateFilter("minYear", e.target.value)}
+                                />
+                            </div>
+                            <div className="col">
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    placeholder="Max year of release"
+                                    value={filters.maxYear || ""}
+                                    onChange={(e) => updateFilter("maxYear", e.target.value)}
+                                />
+                            </div>
 
+                        </div>
                         <InfiniteScroll
                             pageStart={0}
                             loadMore={loadMore}
@@ -194,4 +231,4 @@ function ProductList() {
     );
 }
 
-export default ProductList;
+export default VinylList;

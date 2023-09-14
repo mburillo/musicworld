@@ -3,6 +3,7 @@ import AddressForm from "../../ProcessPayment/AddressForm/AddressForm";
 import axios from 'axios';
 
 function UserSettings() {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [addressInfo, setAddressInfo] = useState({});
     const [saveAddress, setSaveAddress] = useState(false);
     const [message, setMessage] = useState(null);
@@ -15,7 +16,7 @@ function UserSettings() {
             headers: { Authorization: `Bearer ${token}` }
         };
         try {
-            const response = await axios.put('http://localhost:8080/api/user/update', addressInfo, config);
+            const response = await axios.put(`${API_BASE_URL}/api/user/update`, addressInfo, config);
             if (response.status === 200) {
                 setMessage("User settings updated successfully");
                 setMessageType("success");

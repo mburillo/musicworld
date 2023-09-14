@@ -3,6 +3,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import './UserOrders.css';
 import axios from 'axios';
 function UserOrders() {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
@@ -10,9 +11,8 @@ function UserOrders() {
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
-        axios.get('http://localhost:8080/api/orders/user', config)
+        axios.get(`${API_BASE_URL}/api/orders/user`, config)
             .then(response => {
-                console.log(response)
                 setOrders(response.data);
             })
             .catch(error => {
@@ -57,7 +57,7 @@ function UserOrders() {
                         <div className="order-products">
                         <h4 className='mt-5'>Products:</h4>
                         {order.products.map((product, index) => (
-                            <div key={index} className="row align-items-center">
+                            <div key={index} className="row align-items-center mb-3">
                                 <div className="col-4 d-flex align-items-center">
                                     <img src={product.imageUrl[0]} alt={product.name} style={{width: '175px', marginRight: '15px'}} />
                                     <div>

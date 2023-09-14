@@ -4,12 +4,12 @@ import Review from './Review';
 
 function UserReviews() {
     const [reviews, setReviews] = useState([]);
-
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     useEffect(() => {
         const fetchUserReviews = async () => {
             try {
                 const userToken = localStorage.getItem('authToken');
-                const response = await axios.get('https://musicworldspring-production.up.railway.app/api/user/reviews', {
+                const response = await axios.get(`${API_BASE_URL}/api/user/reviews`, {
                     headers: {
                         'Authorization': `Bearer ${userToken}`
                     }

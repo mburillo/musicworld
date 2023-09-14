@@ -6,6 +6,7 @@ import { CartContext } from '../Context/CartContext';
 import { Carousel } from 'react-bootstrap';
 import Review from '../UserProfile/UserReviews/Review';
 function ProductView() {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL; 
     const carouselContainerStyle = {
         height: '400px',
         overflow: 'hidden'
@@ -42,7 +43,7 @@ function ProductView() {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`https://musicworldspring-production.up.railway.app/api/products/${id}`);
+                const response = await axios.get(`${API_BASE_URL}/api/products/${id}`);
                 setProduct(response.data);
             } catch (error) {
                 console.error("Error fetching product:", error);
@@ -55,7 +56,7 @@ function ProductView() {
 
     const fetchReviews = async () => {
         try {
-            const response = await axios.get(`https://musicworldspring-production.up.railway.app/api/reviews/${id}?page=${reviewPage}&size=20&sort=${sortOption}`);
+            const response = await axios.get(`${API_BASE_URL}/api/reviews/${id}?page=${reviewPage}&size=20&sort=${sortOption}`);
 
             if (response.data.length < 20) {
                 setHasMoreReviews(false);
@@ -82,7 +83,7 @@ function ProductView() {
     const handleAddReview = async () => {
         try {
             const token = localStorage.getItem('authToken');
-            await axios.post('https://musicworldspring-production.up.railway.app/api/reviews', { content: newReview, rating: rating, productId: id }, {
+            await axios.post('${API_BASE_URL}/api/reviews', { content: newReview, rating: rating, productId: id }, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }

@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import Product from './Product';
+import Product from '../Product';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './ProductList.css';
-import { CartContext } from '../Context/CartContext';
+import '../ProductList.css';
+import { CartContext } from '../../Context/CartContext';
 import axios from 'axios';
-import { ReactComponent as RightArrow } from '../../assets/images/right-arrow.svg';
-import { ReactComponent as LeftArrow } from '../../assets/images/left-arrow.svg';
-import BigCarousel from './BigCarousel/BigCarousel';
-import SmallCarousel from './SmallCarousel/SmallCarousel';
+import { useLocation } from 'react-router-dom';
+import { ReactComponent as RightArrow } from '../../../assets/images/right-arrow.svg';
+import { ReactComponent as LeftArrow } from '../../../assets/images/left-arrow.svg';
+import BigCarousel from '../BigCarousel/BigCarousel';
+import SmallCarousel from '../SmallCarousel/SmallCarousel';
 import InfiniteScroll from 'react-infinite-scroller';
 import { debounce } from 'lodash';
-function ProductList() {
-
+function ShirtList() {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
     const [products, setProducts] = useState([]);
     const { setCartItems } = useContext(CartContext);
     const [hasMore, setHasMore] = useState(true);
@@ -23,19 +22,22 @@ function ProductList() {
     const mostProductsCarouselLimit = 15;
     const [carouselData, setCarouselData] = useState([]);
     const [limit, setLimit] = useState(5);
+    const currentPageRef = useRef(1);
+    const [colors, setColors] = useState([]);
+    const [sizes, setSizes] = useState([]);
     const [filters, setFilters] = useState({
         searchText: "",
         minPrice: null,
-        maxPrice: null
+        maxPrice: null,
+        color: "",
+        size: ""
     });
-    const currentPageRef = useRef(1);
     useEffect(() => {
         const fetchCarouselData = async () => {
             try {
-                console.log(API_BASE_URL)
-                const response = await axios.get(`${API_BASE_URL}/api/promotional-images?limit=${limit}`);
+                const response = await axios.get(`${API_BASE_URL}/api/promotional-images/shirts?limit=${limit}`);
                 setCarouselData(response.data);
-            } catch (error) {
+            } catch (error) { 
                 console.error('Error:', error);
             }
         };
@@ -45,10 +47,11 @@ function ProductList() {
     const addToCart = (product) => {
         setCartItems(prevItems => [...prevItems, product]);
     };
+
     const loadMore = async () => {
         try {
             const pageToLoad = currentPageRef.current;
-            const response = await axios.get(`${API_BASE_URL}/api/products`, {
+            const response = await axios.get(`${API_BASE_URL}/api/shirts`, {
                 params: {
                     page: pageToLoad,
                     limit: 6,
@@ -66,17 +69,18 @@ function ProductList() {
             if (response.data.length < 6) {
                 setHasMore(false);
             }
+
             currentPageRef.current += 1;
+
         } catch (error) {
             console.error("Error fetching products:", error);
         }
     };
 
-
     useEffect(() => {
         const fetchCarouselData = async () => {
             try {
-                const response = await axios.get(`${API_BASE_URL}/api/products/latest-products?limit=${latestCarouselLimit}`);
+                const response = await axios.get(`${API_BASE_URL}/api/shirts/latest-shirts?limit=${latestCarouselLimit}`);
                 setLatestProductsCarousel(response.data);
             } catch (error) {
                 console.error('Error:', error);
@@ -89,7 +93,7 @@ function ProductList() {
     useEffect(() => {
         const fetchCarouselData = async () => {
             try {
-                const response = await axios.get(`${API_BASE_URL}/api/products/most-sold-products?limit=${mostProductsCarouselLimit}`);
+                const response = await axios.get(`${API_BASE_URL}/api/shirts/most-sold-shirts?limit=${mostProductsCarouselLimit}`);
                 setMostSoldProducts(response.data);
                 console.log(response.data)
             } catch (error) {
@@ -99,8 +103,6 @@ function ProductList() {
 
         fetchCarouselData();
     }, [mostProductsCarouselLimit]);
-
-
 
     const updateFilter = (key, value) => {
         setFilters(prevFilters => ({
@@ -122,9 +124,24 @@ function ProductList() {
         };
     }, [filters]);
 
+    useEffect(() => {
+        const fetchProductData = async () => {
+            try {
+                const sizeResponse = await axios.get(`${API_BASE_URL}/api/products/product-sizes`);
+                const colorResponse = await axios.get(`${API_BASE_URL}/api/products/product-colors`);
+                setSizes(sizeResponse.data);
+                setColors(colorResponse.data);
+            } catch (error) {
+                console.error("Error fetching product data:", error);
+            }
+        };
+        fetchProductData();
+    }, []);
+
+    
     return (
         <>
-            {carouselData.length === 0 ? (
+            {carouselData.length===0 ? (
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -137,14 +154,13 @@ function ProductList() {
                 </div>
             ) : (
                 <>
-                    <BigCarousel carouselData={carouselData} />
-                    <h2 className='text-center mt-5'>Our latest products</h2>
+                    <BigCarousel carouselData={carouselData}/>
+                    <h2 className='text-center mt-5'>Our latest shirts</h2>
                     <SmallCarousel items={latestProductsCarousel} />
-                    <h2 className='text-center mt-5'>Our most sold products</h2>
+                    <h2 className='text-center mt-5'>Our most sold shirts</h2>
                     <SmallCarousel items={mostSoldProducts} />
                     <div className="container mt-5">
-                        <h2 className='text-center mb-3'>All of our products</h2>
-                        <div className="filters row mb-3">
+                    <div className="filters row mb-3">
                             <div className="col">
                                 <input
                                     type="text"
@@ -172,8 +188,19 @@ function ProductList() {
                                     onChange={(e) => updateFilter("maxPrice", e.target.value)}
                                 />
                             </div>
+                            <div className="col">
+                                <select className="form-control" value={filters.size} onChange={e => updateFilter("size", e.target.value)}>
+                                    <option value="">Select a size</option>
+                                    {sizes.map(size => <option key={size} value={size}>{size}</option>)}
+                                </select>
+                            </div>
+                            <div className="col">
+                                <select className="form-control" value={filters.color} onChange={e => updateFilter("color", e.target.value)}>
+                                    <option value="">Select a color</option>
+                                    {colors.map(color => <option key={color} value={color}>{color}</option>)}
+                                </select>
+                            </div>
                         </div>
-
                         <InfiniteScroll
                             pageStart={0}
                             loadMore={loadMore}
@@ -192,6 +219,7 @@ function ProductList() {
             )}
         </>
     );
+    
 }
 
-export default ProductList;
+export default ShirtList;

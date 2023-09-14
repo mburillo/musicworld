@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';  // Asegúrate de importar axios
+import axios from 'axios';
 
 function ForgotPassword() {
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');  // Estado para mostrar mensajes al usuario
+  const [message, setMessage] = useState(''); 
 
   const handlePasswordRecovery = async (event) => {
     event.preventDefault();
     
     try {
-      // Hacemos la solicitud POST al servidor con el correo electrónico del usuario
-      const response = await axios.post('https://musicworldspring-production.up.railway.app/api/verification/forgot-password', { email });
+      const response = await axios.post(`${API_BASE_URL}/api/verification/forgot-password`, { email });
+      if(response.data){
 
-      // Si la operación fue exitosa, mostramos un mensaje al usuario
-      setMessage("If that email address is in our system, we've just sent you password reset instructions.");
+        setMessage("If that email address is in our system, we've just sent you password reset instructions.");
+      }
+
 
     } catch (error) {
       console.error("Error:", error.response.data);

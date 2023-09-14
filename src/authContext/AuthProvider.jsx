@@ -7,12 +7,13 @@ export const AuthContext = createContext({
     setIsAdmin: () => {}
   });
 export const AuthProvider = ({ children }) => {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
-            axios.post('https://musicworldspring-production.up.railway.app/api/verification/verify-token', { token: token })
+            axios.post(`${API_BASE_URL}/api/verification/verify-token`, { token: token })
                 .then(response => {
                     console.log(response.data)
                     if (response.data.isValid) {

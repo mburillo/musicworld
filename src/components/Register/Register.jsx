@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import UseGuestRoute from '../../routes/UseGuestRoute';
 
 function Register() {
-    UseGuestRoute()
+    UseGuestRoute();
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -22,7 +23,7 @@ function Register() {
     const handleRegister = async (event) => {
         event.preventDefault();        
         try {
-            const response = await axios.post('https://musicworldspring-production.up.railway.app/api/user/register', formData);
+            const response = await axios.post(`${API_BASE_URL}/api/user/register`, formData);
             const token = response.data;
             setRegistrationMessage("Se ha registrado con éxito. Para iniciar sesión, confirme en el correo que se ha enviado.");
         } catch (error) {

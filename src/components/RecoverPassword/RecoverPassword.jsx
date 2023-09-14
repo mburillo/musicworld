@@ -4,7 +4,8 @@ import axios from 'axios';
 import UseGuestRoute from '../../routes/UseGuestRoute';
 
 const RecoverPassword = () => {
-    UseGuestRoute()
+    UseGuestRoute();
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [loading, setLoading] = useState(true);
     const [success, setSuccess] = useState(false);
     const [searchParams] = useSearchParams();
@@ -14,7 +15,7 @@ const RecoverPassword = () => {
     useEffect(() => {
         const verify = async () => {
             try {
-                const response = await axios.post('https://musicworldspring-production.up.railway.app/api/verification/verify-email', { token });
+                const response = await axios.post(`${API_BASE_URL}/api/verification/send-recovery-email`);
                 console.log(response)
                 if (response.data.success) {
                     setSuccess(true);

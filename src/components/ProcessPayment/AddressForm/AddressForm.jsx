@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const AddressForm = ({ addressInfo, setAddressInfo}) => {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [countries, setCountries] = useState([]);
 
     const handleAddressChange = (e) => {
@@ -18,7 +19,7 @@ const AddressForm = ({ addressInfo, setAddressInfo}) => {
                 const config = {
                     headers: { Authorization: `Bearer ${token}` }
                 };    
-                const response = await axios.get('http://localhost:8080/api/user/get-address', config);
+                const response = await axios.get(`${API_BASE_URL}/api/user/get-address`, config);
                 const userAddress = response.data;
                 setAddressInfo(userAddress);
             } catch (error) {

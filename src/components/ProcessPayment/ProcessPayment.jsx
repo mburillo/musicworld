@@ -4,6 +4,7 @@ import PaymentForm from './CreditCardForm/PaymentForm';
 import axios from 'axios';
 import { CartContext } from '../Context/CartContext';
 const ProcessPayment = () => {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL; 
     const [addressInfo, setAddressInfo] = useState({});
     const [saveAddress, setSaveAddress] = useState(false);
     const { cartItems } = useContext(CartContext);
@@ -92,9 +93,9 @@ const ProcessPayment = () => {
             headers: {
               "Authorization": 'Bearer '+ token
             }
-          };//https://musicworldspring-production.up.railway.app
+          };
           try {
-            const response = await axios.post('http://localhost:8080/api/user/save-address', address, config);
+            const response = await axios.post(`${API_BASE_URL}/api/user/save-address`, address, config);
             if (response.status === 200) {
 
             }
@@ -114,7 +115,7 @@ const ProcessPayment = () => {
             cartItems
         };
         try {
-            const response = await axios.post('http://localhost:8080/api/payment/process', paymentData, config);
+            const response = await axios.post(`${API_BASE_URL}/api/payment/process`, paymentData, config);
             if (response.status === 200 && response.data.success) {
                 return { success: true };
             } else {

@@ -9,7 +9,7 @@ import UserSettings from './UserSettings/UserSettings';
 import AddProducts from './AddProducts/AddProducts';
 function UserProfile() {
     UseProtectedRoute();
-
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [user, setUser] = useState(null);
     const [view, setView] = useState('orders');
     useEffect(() => {
@@ -20,8 +20,8 @@ function UserProfile() {
                     headers: {
                       "Authorization": 'Bearer '+ token
                     }
-                  };//https://musicworldspring-production.up.railway.app
-                const response = await axios.get('http://localhost:8080/api/user/profile', config);
+                  };
+                const response = await axios.get(`${API_BASE_URL}/api/user/profile`, config);
                 setUser(response.data);
             } catch (error) {
                 console.error("Error fetching user data:", error);

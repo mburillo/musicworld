@@ -14,6 +14,11 @@ import { CartContext } from '../components/Context/CartContext';
 import Payment from '../components/Payment/Payment';
 import Layout from '../components/Layout/Layout';
 import ProcessPayment from '../components/ProcessPayment/ProcessPayment';
+import CDList from '../components/ProductList/CDList/CDList';
+import VinylList from '../components/ProductList/VinylList/VinylList';
+import ShirtList from '../components/ProductList/ShirtList/ShirtList';
+import SendToPasswordUpdate from '../components/SendToPasswordUpdate/SendToPasswordUpdate';
+import UpdatePassword from '../components/UpdatePassword/UpdatePassword';
 export const AppRoutes = () => {
     return (
         <BrowserRouter basename='/musicworld'>
@@ -27,10 +32,15 @@ export const AppRoutes = () => {
                     <Route path='/forgot-password' element={<ForgotPassword/>}/>
                     <Route path='/register' element={<Register/>}/>
                     <Route path="/verify-email" element={<VerifyEmail />} />
+                    <Route path='/send-to-password-update'element={<SendToPasswordUpdate/>} />
+                    <Route path='/update-password' element={<UpdatePassword/>}/>
                     <Route path="recover-password" element={<RecoverPassword/>}/>
                     <Route path="/product/:id" element={<ProductView/>} />
                     <Route path="/payment" element={<Payment/>}/>
                     <Route path="/process-payment" element={<ProcessPayment/>}/>
+                    <Route path="/cds" element={<CDList/>}/>
+                    <Route path="/vinyls" element={<VinylList/>}/>
+                    <Route path="/shirts" element={<ShirtList/>}/>
                 </Routes>
                 <CartModal />
                 <Footer/>

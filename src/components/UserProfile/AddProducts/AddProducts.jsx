@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function AddProducts() {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [productType, setProductType] = useState(null);
     const [sizes, setSizes] = useState([]);
     const [types, setTypes] = useState([]);
@@ -17,6 +18,7 @@ function AddProducts() {
     const [genre, setGenre] = useState(null);
     const [selectedSizes, setSelectedSizes] = useState([]);
     const [color, setColor] = useState("");
+    const [promoType, setPromoType] = useState("");
 
     const [errorMessages, setErrorMessages] = useState([]);
 
@@ -26,17 +28,15 @@ function AddProducts() {
         if (validationErrors.length > 0) {
             setErrorMessages(validationErrors);
             return;
-        } else{
+        } else {
             setErrorMessages([]);
             const formData = new FormData();
             formData.append('name', name);
             formData.append('description', description);
-            formData.append('price', price);
-    
+
             imageFiles.forEach(file => {
                 formData.append('images', file);
             });
-    
             switch (productType) {
                 case "CD":
                 case "VINYL":
@@ -48,42 +48,54 @@ function AddProducts() {
                 case "SHIRT":
                     selectedSizes.forEach(size => {
                         formData.append('sizes', size);
-                    });                
+                    });
                     formData.append('color', color);
                     break;
                 default:
                     break;
             }
-    
+
             try {
-                const endpointMap = {
-                    SHIRT: '/api/products/shirt',
-                    CD: '/api/products/music-format',
-                    VINYL: '/api/products/music-format'
-                };
-                await axios.post("https://musicworldspring-production.up.railway.app"+endpointMap[productType], formData, {
+                let endpoint = "";
+                if (productType === "PROMOTIONALIMAGE") {
+                    endpoint = '/api/promotional-images/add';
+                    formData.append('promoType', promoType);
+                } else {
+                    const endpointMap = {
+                        SHIRT: '/api/products/shirt',
+                        CD: '/api/products/music-format',
+                        VINYL: '/api/products/music-format'
+                    };
+                    endpoint = endpointMap[productType];
+                    formData.append('price', price);
+                }
+                for (var pair of formData.entries()) {
+                    console.log(pair[0] + ', ' + pair[1]);
+                }
+                await axios.post(`${API_BASE_URL}` + endpoint, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
-                
+
                 console.log("Producto añadido con éxito!");
-    
+
             } catch (error) {
                 console.error("Error al añadir producto:", error);
             }
         }
-       
+
     };
 
     const validateFields = () => {
         const errors = [];
-    
+
         if (!name) errors.push("The name field is required.");
         if (!description) errors.push("The description is required");
-        if (!price) errors.push("The price is required.");
         if (!productType) errors.push("The product's type is required.");
-    
+        if (productType !== "PROMOTIONALIMAGE") {
+            if (!price) errors.push("The price is required.");
+        }
         switch (productType) {
             case "CD":
             case "VINYL":
@@ -98,10 +110,10 @@ function AddProducts() {
             default:
                 break;
         }
-    
+
         return errors;
     };
-    
+
 
     const handleFileChange = (e) => {
         console.log(e.target.files)
@@ -110,10 +122,10 @@ function AddProducts() {
     useEffect(() => {
         const fetchProductData = async () => {
             try {
-                const typeResponse = await axios.get('https://musicworldspring-production.up.railway.app/api/products/product-types');
-                const sizeResponse = await axios.get('https://musicworldspring-production.up.railway.app/api/products/product-sizes');
-                const genreResponse = await axios.get('https://musicworldspring-production.up.railway.app/api/products/product-genres');
-                const colorResponse = await axios.get('https://musicworldspring-production.up.railway.app/api/products/product-colors');
+                const typeResponse = await axios.get(`${API_BASE_URL}/api/products/product-types`);
+                const sizeResponse = await axios.get(`${API_BASE_URL}/api/products/product-sizes`);
+                const genreResponse = await axios.get(`${API_BASE_URL}/api/products/product-genres`);
+                const colorResponse = await axios.get(`${API_BASE_URL}/api/products/product-colors`);
                 setTypes(typeResponse.data);
                 setSizes(sizeResponse.data);
                 setGenres(genreResponse.data);
@@ -136,6 +148,7 @@ function AddProducts() {
                             <select className="form-control" value={productType} onChange={(e) => setProductType(e.target.value)}>
                                 <option value="">Select a type</option>
                                 {types.map(type => <option key={type} value={type}>{type}</option>)}
+                                <option key="Promo" value="PROMOTIONALIMAGE">PROMOTIONAL IMAGE</option>
                             </select>
                         </div>
                         <div className="mb-3">
@@ -146,10 +159,21 @@ function AddProducts() {
                             <label className="form-label">Description</label>
                             <textarea className="form-control" value={description} onChange={e => setDescription(e.target.value)}></textarea>
                         </div>
-                        <div className="mb-3">
-                            <label className="form-label">Price</label>
-                            <input type="number" step="0.01" className="form-control" value={price} onChange={e => setPrice(e.target.value)} />
-                        </div>
+                        {productType !== "PROMOTIONALIMAGE" && (
+                            <div className="mb-3">
+                                <label className="form-label">Price</label>
+                                <input type="number" step="0.01" className="form-control" value={price} onChange={e => setPrice(e.target.value)} />
+                            </div>
+                        )}
+                        {productType === "PROMOTIONALIMAGE" && (
+                            <div className="mb-3">
+                                <label className="form-label">Promo Type</label>
+                                <select className="form-control" value={promoType} onChange={(e) => setPromoType(e.target.value)}>
+                                    {types.map(type => <option key={type} value={type}>{type}</option>)}
+                                </select>
+                            </div>
+                        )}
+
                         <div className="mb-3">
                             <label className="form-label">Promotional images</label>
                             <input type="file" className="form-control" multiple onChange={handleFileChange} />
@@ -195,17 +219,17 @@ function AddProducts() {
                         </div>
                     </form>
                     {errorMessages.length > 0 && (
-            <div className="alert alert-danger">
-                {errorMessages.map((error, index) => (
-                    <div key={index}>{error}</div>
-                ))}
-            </div>
-        )}
+                        <div className="alert alert-danger">
+                            {errorMessages.map((error, index) => (
+                                <div key={index}>{error}</div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
     );
-    
+
 }
 
 export default AddProducts;
