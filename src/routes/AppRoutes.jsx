@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, BrowserRouter, HashRouter } from 'react-router-dom';
 import ProductList from '../components/ProductList/ProductList';
 import NavigationBar from '../components/NavigationBar/NavigationBar';
 import Footer from '../components/Footer/Footer';
@@ -21,7 +21,7 @@ import SendToPasswordUpdate from '../components/SendToPasswordUpdate/SendToPassw
 import UpdatePassword from '../components/UpdatePassword/UpdatePassword';
 export const AppRoutes = () => {
     return (
-        <BrowserRouter basename='/musicworld'>
+        <HashRouter basename='/musicworld'>
             <div>
                 <Layout>
                 <NavigationBar />
@@ -46,6 +46,6 @@ export const AppRoutes = () => {
                 <Footer/>
                 </Layout>
             </div>    
-        </BrowserRouter>
+        </HashRouter>
     );
 };
