@@ -21,7 +21,7 @@ import SendToPasswordUpdate from '../components/SendToPasswordUpdate/SendToPassw
 import UpdatePassword from '../components/UpdatePassword/UpdatePassword';
 export const AppRoutes = () => {
     return (
-        <HashRouter basename='/musicworld'>
+        <HashRouter>
             <div>
                 <Layout>
                 <NavigationBar />
