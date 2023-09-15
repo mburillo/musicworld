@@ -158,6 +158,7 @@ function CDList() {
                     <h2 className='text-center mt-5'>Our most sold CDs</h2>
                     <SmallCarousel items={mostSoldProducts} />
                     <div className="container mt-5">
+                    <h2 className='text-center mb-3'>All of our CDs</h2>
                     <div className="filters row mb-3">
                             <div className="col">
                                 <input

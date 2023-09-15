@@ -215,7 +215,7 @@ function AddProducts() {
                             </>
                         ) : null}
                         <div className="text-center">
-                            <button type="submit" className="btn btn-primary">Add</button>
+                            <button type="submit" className="btn btn-primary mb-3">Add</button>
                         </div>
                     </form>
                     {errorMessages.length > 0 && (

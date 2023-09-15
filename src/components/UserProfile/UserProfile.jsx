@@ -18,9 +18,9 @@ function UserProfile() {
                 const token = localStorage.getItem("authToken");
                 const config = {
                     headers: {
-                      "Authorization": 'Bearer '+ token
+                        "Authorization": 'Bearer ' + token
                     }
-                  };
+                };
                 const response = await axios.get(`${API_BASE_URL}/api/user/profile`, config);
                 setUser(response.data);
             } catch (error) {
@@ -30,7 +30,7 @@ function UserProfile() {
         fetchUserData();
     }, []);
     const renderView = () => {
-        switch(view) {
+        switch (view) {
             case 'orders':
                 return <UserOrders />;
             case 'reviews':
@@ -49,18 +49,28 @@ function UserProfile() {
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-6 text-center">
-                    <img src={usericon} alt="User Profile" className="img-fluid rounded-circle mb-3" style={{width: '150px', height: '150px'}} />
+                    <img src={usericon} alt="User Profile" className="img-fluid rounded-circle mb-3" style={{ width: '150px', height: '150px' }} />
                     <h2>{user.firstName} {user.lastName}</h2>
                 </div>
             </div>
-   
+
             <div className="row mt-5">
                 <div className="col-md-12">
                     <ul className="list-group list-group-horizontal justify-content-center">
-                        <li className="list-group-item flex-fill text-center"><a href="#" onClick={() => setView('orders')}>Orders</a></li>
-                        <li className="list-group-item flex-fill text-center"><a href="#" onClick={() => setView('reviews')}>Reviews</a></li>
-                        <li className="list-group-item flex-fill text-center"><a href="#" onClick={() => setView('settings')}>Settings</a></li>
-                        {user.admin && <li className="list-group-item flex-fill text-center"><a href="#" onClick={() => setView('add-product')}>Add products</a></li>}
+                        <li className="list-group-item flex-fill text-center">
+                            <button className="btn btn-link" onClick={() => setView('orders')}>Orders</button>
+                        </li>
+                        <li className="list-group-item flex-fill text-center">
+                            <button className="btn btn-link" onClick={() => setView('reviews')}>Reviews</button>
+                        </li>
+                        <li className="list-group-item flex-fill text-center">
+                            <button className="btn btn-link" onClick={() => setView('settings')}>Settings</button>
+                        </li>
+                        {user.admin &&
+                            <li className="list-group-item flex-fill text-center">
+                                <button className="btn btn-link" onClick={() => setView('add-product')}>Add products</button>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <div className="col-md-12 mt-4">
@@ -69,7 +79,7 @@ function UserProfile() {
             </div>
         </div>
     );
-    
+
 }
 
 export default UserProfile;

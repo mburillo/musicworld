@@ -15,7 +15,7 @@ const SmallCarousel = ({ items }) => {
           <div className="d-flex custom-carousel-container">
             {chunk.map((item, i) => (
               <Card className='custom-carousel-card' key={i} style={{ width: '18rem' }}>
-                  <Link to={`/product/${chunk.id}`} style={{ display: 'block', textAlign: 'center' }}>
+                  <Link to={`/product/${item.id}`} style={{ display: 'block', textAlign: 'center' }}>
                 <Card.Img variant="top" src={item.imageUrl[0]} className="custom-card-img" />
                 </Link>
                 <Card.Body>

@@ -157,6 +157,7 @@ function VinylList() {
                     <h2 className='text-center mt-5'>Our most sold vinyls</h2>
                     <SmallCarousel items={mostSoldProducts} />
                     <div className="container mt-5">
+                    <h2 className='text-center mb-3'>All of our vinyls</h2>
                         <div className="filters row mb-3">
                             <div className="col">
                                 <input

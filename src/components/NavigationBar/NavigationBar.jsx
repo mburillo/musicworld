@@ -7,8 +7,9 @@ import usericon from '../../assets/images/usericon.svg';
 import shoppingcarticon from '../../assets/images/shoppingcart.svg';
 import { CartContext } from '../Context/CartContext';
 import { AuthContext } from '../../authContext/AuthProvider';
+import './NavigationBar.css';
 const NavigationBar = () => {
-    const { setShowModal } = useContext(CartContext);
+    const { setShowModal, cartItems } = useContext(CartContext);
     const { isAuthenticated } = useContext(AuthContext);
 
     return (
@@ -40,9 +41,11 @@ const NavigationBar = () => {
                     </Col>
                     <Col xs={4} className="d-flex justify-content-end">
                         <Nav>
-                            <button onClick={() => setShowModal(true)} style={{ border: 'none', background: 'transparent' }}>
-                                <img src={shoppingcarticon} alt="shopping-cart" width="30" height="30" />
-                            </button>
+                        <button onClick={() => setShowModal(true)} style={{ position: 'relative', border: 'none', background: 'transparent' }}>
+    <img src={shoppingcarticon} alt="shopping-cart" width="30" height="30" />
+    {cartItems.length > 0 && <span className="cart-item-count">{cartItems.length}</span>}
+</button>
+
                             <LinkContainer to={isAuthenticated ? "/profile" : "/login"}>
                                 <Nav.Link>
                                     <img src={usericon} alt="user-icon" width="30" height="30" />
