@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/musicworld/static/css/main.72ba2ac9.css",
-    "main.js": "/musicworld/static/js/main.9da34464.js",
+    "main.css": "/musicworld/static/css/main.39e79b44.css",
+    "main.js": "/musicworld/static/js/main.08528329.js",
     "static/js/787.60e6cc5c.chunk.js": "/musicworld/static/js/787.60e6cc5c.chunk.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/musicworld/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/musicworld/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
@@ -22,12 +22,12 @@
     "static/media/email.svg": "/musicworld/static/media/email.8cd101eb5f737c27e91052a56f1a5dec.svg",
     "static/media/left-arrow.svg": "/musicworld/static/media/left-arrow.f52adc26d1695c1b88bcb0f15fa48fc9.svg",
     "static/media/right-arrow.svg": "/musicworld/static/media/right-arrow.5df2fe6d4d81999847cb601c6f6b4649.svg",
-    "main.72ba2ac9.css.map": "/musicworld/static/css/main.72ba2ac9.css.map",
-    "main.9da34464.js.map": "/musicworld/static/js/main.9da34464.js.map",
+    "main.39e79b44.css.map": "/musicworld/static/css/main.39e79b44.css.map",
+    "main.08528329.js.map": "/musicworld/static/js/main.08528329.js.map",
     "787.60e6cc5c.chunk.js.map": "/musicworld/static/js/787.60e6cc5c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.72ba2ac9.css",
-    "static/js/main.9da34464.js"
+    "static/css/main.39e79b44.css",
+    "static/js/main.08528329.js"
   ]
 }
