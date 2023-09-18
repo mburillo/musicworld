@@ -31,24 +31,25 @@ const RecoverPassword = () => {
     }, [token]);
 
     if (loading) {
-        return <div>Verificando...</div>;
+        return <div>Verifying...</div>;
     }
 
     return (
+<div>
+    {success ? (
         <div>
-            {success ? (
-                <div>
-                    <h1>Verificación exitosa</h1>
-                    <p>Tu cuenta ha sido verificada. Serás redirigido a la página de inicio en unos momentos.</p>
-                    {setTimeout(() => navigate('/'), 3000)}
-                </div>
-            ) : (
-                <div>
-                    <h1>Error en la verificación</h1>
-                    <p>Ha ocurrido un error al verificar tu cuenta. Por favor, intenta nuevamente o contacta al soporte.</p>
-                </div>
-            )}
+            <h1>Verification Successful</h1>
+            <p>Your account has been verified. You will be redirected to the home page in a few moments.</p>
+            {setTimeout(() => navigate('/'), 3000)}
         </div>
+    ) : (
+        <div>
+            <h1>Verification Error</h1>
+            <p>An error occurred while verifying your account. Please try again or contact support.</p>
+        </div>
+    )}
+</div>
+
     );
 };
 

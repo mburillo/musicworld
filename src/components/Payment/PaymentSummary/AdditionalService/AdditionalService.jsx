@@ -29,7 +29,7 @@ const AdditionalService = ({ onCostAdd, onCostRemove }) => {
               </div>
               <div class="d-flex align-items-center">
                 <p class="pe-3">1.00€</p>
-                <div class="form-check form-switch"> <input class="form-check-input" type="checkbox" id="SwitchCheck" value="2" onChange={(e) => handleCheckboxChange(e, 'GoldenGuard', 1)} /> </div>
+                <div class="form-check form-switch"> <input class="form-check-input" type="checkbox" id="SwitchCheck" value="2" onChange={(e) => handleCheckboxChange(e, 'Environment', 1)} /> </div>
               </div>
             </div>
           </div>

@@ -30,7 +30,7 @@ const VerifyEmail = () => {
     }, [token]);
 
     if (loading) {
-        return <div>Verificando...</div>;
+        return <div>Verifying...</div>;
     }
 
     return (

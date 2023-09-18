@@ -4,13 +4,15 @@ import CartItem from '../CartItem/CartItem';
 import closebutton from '../../assets/images/closebutton.svg';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../authContext/AuthProvider';
-import { Link } from 'react-router-dom';
-
 function CartModal({ show, onClose }) {
+    const navigate = useNavigate();
     const { cartItems, getTotalPrice } = useContext(CartContext);
     const { isAuthenticated } = useContext(AuthContext);
     const totalPrice = getTotalPrice();
-
+    const handlePayClick = () => {
+        onClose();
+        navigate(isAuthenticated ? '/payment' : '/login');
+    };
     if (!show) return null;
     return (
         <div style={{
@@ -46,24 +48,20 @@ function CartModal({ show, onClose }) {
                     <CartItem key={item.id} product={item} />
                 ))}
             </div>
-
             <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }}>
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
                 <h2 style={{ marginRight: '20px' }}>Total: {totalPrice.toFixed(2)}€</h2>
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-                    <Link
-                        to={isAuthenticated ? '/payment' : '/login'}
-                        className="btn btn-primary"
-                    >
+                    <button className="btn btn-primary" onClick={handlePayClick}>
                         Pay
-                    </Link>
+                    </button>
                 </div>
             </div>
         </div>

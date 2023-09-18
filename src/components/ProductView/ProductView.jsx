@@ -113,7 +113,7 @@ function ProductView() {
 
     useEffect(() => {
 
-        fetchReviews(); // Cargar las reviews iniciales
+        fetchReviews(); 
     }, [id, reviewPage]);
     const handleStarClick = (index) => {
         setRating(index + 1);
