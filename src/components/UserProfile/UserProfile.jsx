@@ -55,28 +55,29 @@ function UserProfile() {
             </div>
 
             <div className="row mt-5">
-                <div className="col-md-12">
-                    <ul className="list-group list-group-horizontal justify-content-center">
-                        <li className="list-group-item flex-fill text-center">
-                            <button className="btn btn-link" onClick={() => setView('orders')}>Orders</button>
-                        </li>
-                        <li className="list-group-item flex-fill text-center">
-                            <button className="btn btn-link" onClick={() => setView('reviews')}>Reviews</button>
-                        </li>
-                        <li className="list-group-item flex-fill text-center">
-                            <button className="btn btn-link" onClick={() => setView('settings')}>Settings</button>
-                        </li>
-                        {user.admin &&
-                            <li className="list-group-item flex-fill text-center">
-                                <button className="btn btn-link" onClick={() => setView('add-product')}>Add products</button>
-                            </li>
-                        }
-                    </ul>
-                </div>
-                <div className="col-md-12 mt-4">
-                    {renderView()}
-                </div>
-            </div>
+    <div className="col-md-12">
+        <ul className="list-group list-group-horizontal justify-content-center flex-wrap"> {/* Añadido flex-wrap */}
+            <li className="list-group-item flex-fill text-center">
+                <button className="btn btn-link btn-sm" onClick={() => setView('orders')}>Orders</button> {/* Añadido btn-sm */}
+            </li>
+            <li className="list-group-item flex-fill text-center">
+                <button className="btn btn-link btn-sm" onClick={() => setView('reviews')}>Reviews</button> {/* Añadido btn-sm */}
+            </li>
+            <li className="list-group-item flex-fill text-center">
+                <button className="btn btn-link btn-sm" onClick={() => setView('settings')}>Settings</button> {/* Añadido btn-sm */}
+            </li>
+            {user.admin &&
+                <li className="list-group-item flex-fill text-center">
+                    <button className="btn btn-link btn-sm" onClick={() => setView('add-product')}>Add products</button> {/* Añadido btn-sm */}
+                </li>
+            }
+        </ul>
+    </div>
+    <div className="col-md-12 mt-4">
+        {renderView()}
+    </div>
+</div>
+
         </div>
     );
 

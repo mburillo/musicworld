@@ -57,34 +57,35 @@ function UserOrders() {
                         <div className="order-products">
                         <h4 className='mt-5'>Products:</h4>
                         {order.products.map((product, index) => (
-                            <div key={index} className="row align-items-center mb-3">
-                                <div className="col-4 d-flex align-items-center">
-                                    <img src={product.imageUrl[0]} alt={product.name} style={{width: '175px', marginRight: '15px'}} />
-                                    <div>
-                                        <span className="d-block">{product.name}</span>
-                                        <small className="text-muted">{product.type}</small>
-                                    </div>
-                                </div>
-                                <div className="col-4 text-center">
-                                    {product.type === 'CD' || product.type === 'VINYL' ? (
-                                        <div className="text-muted">
-                                            <small>Year: {product.releaseYear}</small><br />
-                                            <small>Genre: {product.genre}</small><br />
-                                            <small>Artist: {product.author}</small>
-                                        </div>
-                                    ) : null}
-                                    {product.type === 'SHIRT' ? (
-                                        <div className="text-muted">
-                                            <small>Size: {product.size.join(', ')}</small><br />
-                                            <small>Color: {product.color}</small>
-                                        </div>
-                                    ) : null}
-                                </div>
-                                <div className="col-4 custom-text-right">
-                                    ${product.price}
-                                </div>
-                            </div>
-                        ))}
+    <div key={index} className="row align-items-center mb-3">
+        <div className="col-md-4 col-sm-12 d-flex align-items-center">
+            <img src={product.imageUrl[0]} alt={product.name} className="img-fluid" style={{ maxWidth: '175px', marginRight: '15px' }} />
+            <div>
+                <span className="d-block">{product.name}</span>
+                <small className="text-muted">{product.type}</small>
+            </div>
+        </div>
+        <div className="col-md-4 col-sm-12 text-center">
+            {product.type === 'CD' || product.type === 'VINYL' ? (
+                <div className="text-muted">
+                    <small>Year: {product.releaseYear}</small><br />
+                    <small>Genre: {product.genre}</small><br />
+                    <small>Artist: {product.author}</small>
+                </div>
+            ) : null}
+            {product.type === 'SHIRT' ? (
+                <div className="text-muted">
+                    <small>Size: {product.size.join(', ')}</small><br />
+                    <small>Color: {product.color}</small>
+                </div>
+            ) : null}
+        </div>
+        <div className="col-md-4 col-sm-12 text-md-right text-center"> 
+            ${product.price}
+        </div>
+    </div>
+))}
+
                     </div>
                     </li >
                 ))

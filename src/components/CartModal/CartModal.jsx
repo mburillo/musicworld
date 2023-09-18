@@ -18,7 +18,8 @@ function CartModal({ show, onClose }) {
             top: 80,
             right: 0,
             height: 'calc(100% - 80px)',
-            width: '500px',
+            width: '100%',
+            maxWidth: '500px',
             backgroundColor: 'white',
             zIndex: 1000,
             overflow: 'hidden',
@@ -26,8 +27,8 @@ function CartModal({ show, onClose }) {
             boxShadow: '-2px 0 5px rgba(0, 0, 0, 0.3)'
         }}>
 
-            <button onClick={onClose} style={{border: 'none', background: 'transparent'}}>
-              <img src={closebutton} alt="closingbutton" width={30} height={30}/>
+            <button onClick={onClose} style={{ border: 'none', background: 'transparent' }}>
+                <img src={closebutton} alt="closingbutton" width={30} height={30} />
             </button>
 
             <div className="p-3">
@@ -36,10 +37,10 @@ function CartModal({ show, onClose }) {
                     <h6 className="mb-0 text-muted">{cartItems.length} items</h6>
                 </div>
             </div>
-            
+
             <div style={{
                 overflowY: 'auto',
-                height: 'calc(100% - 180px)', 
+                height: 'calc(100% - 180px)',
             }}>
                 {cartItems.map(item => (
                     <CartItem key={item.id} product={item} />
@@ -47,21 +48,23 @@ function CartModal({ show, onClose }) {
             </div>
 
             <div style={{
-                position: 'fixed',
-                bottom: 0,
-                right: 0,
-                width: '500px',
-                padding: '20px',
-                backgroundColor: 'white',
-                borderTop: '1px solid black',
-            }}>
-                <h2>Total: {totalPrice.toFixed(2)}€</h2>
-                <Link 
-    to={isAuthenticated ? '/payment' : '/login'} 
-    className="btn btn-primary"
->
-    Pay
-</Link>
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }}>
+                <h2 style={{ marginRight: '20px' }}>Total: {totalPrice.toFixed(2)}€</h2>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Link
+                        to={isAuthenticated ? '/payment' : '/login'}
+                        className="btn btn-primary"
+                    >
+                        Pay
+                    </Link>
+                </div>
             </div>
         </div>
     );
