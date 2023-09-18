@@ -11,8 +11,6 @@ const PaymentForm = ({ cardInfo, setCardInfo }) => {
     }
   };
 
-
-
   const handleExpiryChange = (e) => {
     const { name, value } = e.target;
     if (value.length <= 5) {

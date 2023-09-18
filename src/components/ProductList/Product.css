@@ -10,6 +10,7 @@
 }
 
 .card-body {
+    position: relative;
     flex: 1 1 auto;
 }
 
@@ -20,4 +21,10 @@
     display: -webkit-box;
     -webkit-line-clamp: 4; 
     -webkit-box-orient: vertical;
+}
+.size-container {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    right: 0;
 }

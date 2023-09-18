@@ -7,6 +7,9 @@ import { Carousel } from 'react-bootstrap';
 import Review from '../UserProfile/UserReviews/Review';
 function ProductView() {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL; 
+    const [selectedSize, setSelectedSize] = useState(null);
+    const [reviewError, setReviewError] = useState(null);
+
     const carouselContainerStyle = {
         height: '400px',
         overflow: 'hidden'
@@ -31,15 +34,26 @@ function ProductView() {
 
     const handleAddToCart = () => {
         const essentialProductData = {
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            imageUrl: product.imageUrl,
-            quantity: 1
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          imageUrl: product.imageUrl,
+          quantity: 1
         };
-        addToCart(essentialProductData);
-    }
-
+      
+        if (product.type === 'SHIRT') {
+          essentialProductData.size = selectedSize;
+          addToCart(essentialProductData, selectedSize);
+        } else {
+          addToCart(essentialProductData);
+        }
+      };
+      
+    
+      const handleSizeChange = (e) => {
+        setSelectedSize(e.target.value);
+      };
+    
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -79,11 +93,10 @@ function ProductView() {
     const handleNewReviewChange = (e) => {
         setNewReview(e.target.value);
     };
-
     const handleAddReview = async () => {
         try {
             const token = localStorage.getItem('authToken');
-            await axios.post('${API_BASE_URL}/api/reviews', { content: newReview, rating: rating, productId: id }, {
+            await axios.post(`${API_BASE_URL}/api/reviews`, { content: newReview, rating: rating, productId: id }, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
@@ -91,8 +104,10 @@ function ProductView() {
             setNewReview('');
             setReviewPage(0);
             fetchReviews();
+            setReviewError(null);
         } catch (error) {
             console.error("Error adding review:", error);
+            setReviewError("An error occurred while submitting your review. Please try again.");
         }
     };
 
@@ -128,7 +143,7 @@ function ProductView() {
     return (
         <><div className="product container mt-5">
             <div className="row">
-                <div className="col-md-2"></div> {/* Columna vacía como espaciador */}
+                <div className="col-md-2"></div> 
 
                 <div className="col-md-5">
                     <Carousel controls={product.imageUrl.length > 1}>
@@ -147,16 +162,16 @@ function ProductView() {
                     <p>Price: ${product.price.toFixed(2)}</p>
 
                     {product.type === "SHIRT" && (
-                        <div className="mt-2">
-                            <label>Size:
-                                <select className="ml-2">
-                                    {product.size.map((size, index) => (
-                                        <option key={index} value={size}>{size}</option>
-                                    ))}
-                                </select>
-                            </label>
-                        </div>
-                    )}
+      <div className="mt-2">
+        <label>Size:
+          <select className="ml-2" onChange={handleSizeChange}>
+            {product.size.map((size, index) => (
+              <option key={index} value={size}>{size}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+    )}
 
                     <div className="mt-3">
                         <button className="btn btn-primary" onClick={handleAddToCart}>Add to cart</button>
@@ -168,7 +183,7 @@ function ProductView() {
 
                     <textarea className="form-control mb-3" rows="4" value={newReview} onChange={handleNewReviewChange} placeholder="Your review..."></textarea>
 
-                    {/* Componente de selección de estrellas */}
+
                     <div className="mb-3">
                         {[...Array(5)].map((star, i) => (
                             <i key={i} className={`fa fa-star ${i < rating ? 'text-warning' : 'text-muted'}`} onClick={() => handleStarClick(i)} style={{ cursor: 'pointer' }}></i>
@@ -176,13 +191,14 @@ function ProductView() {
                     </div>
 
                     <button className="btn btn-primary" onClick={handleAddReview}>Add Review</button>
+                    {reviewError && <p className="text-danger mt-2">{reviewError}</p>}
                 </div>
 
                 <div className="reviews-section mt-5">
                     <h3>Reviews</h3>
                     <div className="sort-options mt-5">
                         <label>Sort by: </label>
-                        <select onChange={handleSortChange} value={sortOption}>
+                        <select onChange={handleSortChange} value={sortOption} className='mb-3'>
                             <option value="best">Best Reviews</option>
                             <option value="worst">Worst Reviews</option>
                             <option value="newest">Most Recent</option>
@@ -190,9 +206,13 @@ function ProductView() {
                         </select>
                     </div>
 
-                    {reviews.map((review, index) => (
-                        <Review key={index} review={review} />
-                    ))}
+                    {reviews.length > 0 ? (
+        reviews.map((review, index) => (
+            <Review key={index} review={review} />
+        ))
+    ) : (
+        <p className='text-center mb-3'>No reviews yet. Be the first to review this product!</p>
+    )}
 
                 </div>
             </div>

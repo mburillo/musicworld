@@ -27,8 +27,8 @@ const PaymentSummary = () => {
     const navigate = useNavigate();
 
     const goToNewView = () => {
-        navigate('/process-payment');
-    };
+        navigate('/process-payment', { state: { finalAmount, additionalCosts } });
+    };    
     return (
         <><div className="col-lg-4 payment-summary">
             <p className="fw-bold pt-lg-0 pt-4 pb-2">Payment Summary</p>

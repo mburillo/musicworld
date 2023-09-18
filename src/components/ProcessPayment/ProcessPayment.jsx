@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import AddressForm from './AddressForm/AddressForm';
+import { useLocation } from 'react-router-dom';
 import PaymentForm from './CreditCardForm/PaymentForm';
 import axios from 'axios';
 import { CartContext } from '../Context/CartContext';
@@ -8,6 +9,9 @@ const ProcessPayment = () => {
     const [addressInfo, setAddressInfo] = useState({});
     const [saveAddress, setSaveAddress] = useState(false);
     const { cartItems } = useContext(CartContext);
+    const [confirmationMessage, setConfirmationMessage] = useState(null);
+    const location = useLocation();
+    const { finalAmount, additionalCosts } = location.state || {};
     const [cardInfo, setCardInfo] = useState({
         cardName: '',
         cardNumber: '',
@@ -78,10 +82,21 @@ const ProcessPayment = () => {
                 }
                 const paymentResult = await processPayment(cardInfo);
                 if (paymentResult.success) {
+                    setConfirmationMessage("Your order has been processed succesfully!");
+                    setAddressInfo({});
+                    setCardInfo({
+                        cardName: '',
+                        cardNumber: '',
+                        cardExpiry: '',
+                        cardCVV: ''
+                    });
+                    setSaveAddress(false);
                 } else {
+                    setConfirmationMessage("Your order could not be processed. Please try again.");
                 }
             } catch (error) {
-                console.error("Ocurrió un error durante el proceso de pago:", error);
+                console.error("Error", error);
+                setConfirmationMessage("An error occured while processing your order. Please try again");
             }
         }
     };
@@ -112,11 +127,13 @@ const ProcessPayment = () => {
     
         const paymentData = {
             addressInfo,
-            cartItems
+            cartItems,
+            finalAmount,
+            additionalCosts
         };
         try {
             const response = await axios.post(`${API_BASE_URL}/api/payment/process`, paymentData, config);
-            if (response.status === 200 && response.data.success) {
+            if (response.status === 200 && response.data) {
                 return { success: true };
             } else {
                 return { success: false };
@@ -148,12 +165,18 @@ const ProcessPayment = () => {
             <div className="text-center">
                 <button type="submit" className="btn btn-primary mb-3" onClick={handlePayment}>Submit</button>
             </div>
-            {Object.keys(errors).map((key, index) => (
-                <div key={index} className="alert alert-danger mt-3">
-                    {errors[key]}
-                </div>
-            ))}
-        </div>
+            {confirmationMessage && (
+            <div className="alert alert-info mt-3">
+                {confirmationMessage}
+            </div>
+        )}
+        
+        {Object.keys(errors).map((key, index) => (
+            <div key={index} className="alert alert-danger mt-3">
+                {errors[key]}
+            </div>
+        ))}
+    </div>
     );
 };
 

@@ -32,7 +32,6 @@ function ProductList() {
     useEffect(() => {
         const fetchCarouselData = async () => {
             try {
-                console.log(API_BASE_URL)
                 const response = await axios.get(`${API_BASE_URL}/api/promotional-images?limit=${limit}`);
                 setCarouselData(response.data);
             } catch (error) {
@@ -62,7 +61,7 @@ function ProductList() {
                 const updatedProducts = [...prevProducts, ...newData];
                 return updatedProducts;
             });
-
+            console.log(products)
             if (response.data.length < 6) {
                 setHasMore(false);
             }
