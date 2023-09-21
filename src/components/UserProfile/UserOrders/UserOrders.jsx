@@ -18,7 +18,7 @@ function UserOrders() {
             .catch(error => {
                 console.error('Error:', error);
             });
-    }, []);
+    }, [API_BASE_URL]);
     return (
         <div>
             <h3 className='text-center'>Your orders</h3>

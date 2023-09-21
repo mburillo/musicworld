@@ -30,4 +30,12 @@
     width: auto;  
     object-fit: cover; 
   }
-  
+  .toast-container {
+    display: flex;
+    flex-direction: column-reverse; /* Esto hará que el último toast aparezca en la parte inferior */
+    gap: 1rem; /* Espacio entre toasts */
+    z-index: 9999;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}

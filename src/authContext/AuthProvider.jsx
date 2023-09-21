@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
                     setIsAuthenticated(false);
                 });
         }
-    }, []);
+    }, [API_BASE_URL]);
 
     return (
 <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, isAdmin, setIsAdmin}}>

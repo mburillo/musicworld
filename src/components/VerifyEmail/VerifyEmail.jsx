@@ -27,7 +27,7 @@ const VerifyEmail = () => {
         };
         
         verify();
-    }, [token]);
+    }, [token, API_BASE_URL]);
 
     if (loading) {
         return <div>Verifying...</div>;

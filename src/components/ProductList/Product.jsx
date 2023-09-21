@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import './ProductList.css';
 import './Product.css';
 
-const Product = ({ product }) => {
+const Product = ({ product, handleShowToast }) => {
     const { addToCart } = useContext(CartContext);
-
     const [selectedSize, setSelectedSize] = useState(null);
     const handleAddToCart = () => {
         if (product.type === 'SHIRT') {
@@ -14,6 +13,7 @@ const Product = ({ product }) => {
         } else {
             addToCart(product);
         }
+        handleShowToast();
     };
     const handleSizeChange = (e) => {
         setSelectedSize(e.target.value);
@@ -53,9 +53,11 @@ const Product = ({ product }) => {
                     <div className="d-flex justify-content-center">
                         <button className="btn btn-primary" onClick={handleAddToCart}>Add to cart</button>
                     </div>
+                   
                 </div>
             </div>
         </div>
+        
     );
 };
 

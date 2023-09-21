@@ -3,7 +3,7 @@ import { CartContext } from '../../Context/CartContext';
 import AdditionalService from './AdditionalService/AdditionalService';
 import { useNavigate } from 'react-router-dom';
 const PaymentSummary = () => {
-    const { getTotalPrice, cartItems } = useContext(CartContext);
+    const { getTotalPrice} = useContext(CartContext);
     const [additionalCosts, setAdditionalCosts] = useState({});
     const totalPrice = getTotalPrice();
     const shippingCost = totalPrice >= 25 ? 0 : 5;

@@ -4,9 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../ProductList.css';
 import { CartContext } from '../../Context/CartContext';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
-import { ReactComponent as RightArrow } from '../../../assets/images/right-arrow.svg';
-import { ReactComponent as LeftArrow } from '../../../assets/images/left-arrow.svg';
 import BigCarousel from '../BigCarousel/BigCarousel';
 import SmallCarousel from '../SmallCarousel/SmallCarousel';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -32,6 +29,22 @@ function ShirtList() {
         color: "",
         size: ""
     });
+    const [toasts, setToasts] = useState([]);
+
+    const handleShowToast = (message) => {
+        const newToast = {
+            id: new Date().getTime(),
+            message: message
+        };
+        setToasts([...toasts, newToast]);
+    
+        setTimeout(() => {
+            setToasts(toasts => toasts.filter(t => t.id !== newToast.id));
+        }, 3000);
+    };
+    const removeToast = (toastId) => {
+        setToasts(prevToasts => prevToasts.filter(toast => toast.id !== toastId));
+    };
     useEffect(() => {
         const fetchCarouselData = async () => {
             try {
@@ -43,7 +56,7 @@ function ShirtList() {
         };
 
         fetchCarouselData();
-    }, [limit]);
+    }, [limit, API_BASE_URL]);
     const addToCart = (product) => {
         setCartItems(prevItems => [...prevItems, product]);
     };
@@ -88,7 +101,7 @@ function ShirtList() {
         };
 
         fetchCarouselData();
-    }, [latestCarouselLimit]);
+    }, [latestCarouselLimit, API_BASE_URL]);
 
     useEffect(() => {
         const fetchCarouselData = async () => {
@@ -102,7 +115,7 @@ function ShirtList() {
         };
 
         fetchCarouselData();
-    }, [mostProductsCarouselLimit]);
+    }, [mostProductsCarouselLimit, API_BASE_URL]);
 
     const updateFilter = (key, value) => {
         setFilters(prevFilters => ({
@@ -136,7 +149,7 @@ function ShirtList() {
             }
         };
         fetchProductData();
-    }, []);
+    }, [API_BASE_URL]);
 
     
     return (
@@ -212,13 +225,24 @@ function ShirtList() {
 
                             <div className="row">
                                 {products.map((product) => (
-                                    <Product key={product.id} product={product} addToCart={addToCart} />
+                                     <Product key={product.id} product={product} addToCart={addToCart} handleShowToast={handleShowToast} />
                                 ))}
                             </div>
                         </InfiniteScroll>
                     </div>
                 </>
             )}
+                {toasts.map(toast => (
+        <div key={toast.id} className="toast show">
+            <div className="toast-header">
+                <strong className="me-auto">Notification</strong>
+                <button type="button" className="btn-close" onClick={() => removeToast(toast.id)}></button>
+            </div>
+            <div className="toast-body">
+                Your item has been added to the cart!
+            </div>
+        </div>
+    ))}
         </>
     );
     

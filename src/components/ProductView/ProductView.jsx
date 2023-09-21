@@ -64,7 +64,7 @@ function ProductView() {
             }
         };
         fetchProduct();
-    }, [id]);
+    }, [id, API_BASE_URL]);
 
 
 
@@ -139,7 +139,16 @@ function ProductView() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [hasMoreReviews]);
 
-    if (!product) return <div className="text-center mt-5">Loading...</div>;
+    if (!product) return   <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh'
+    }}>
+        <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+        </div>
+    </div>;
     return (
         <><div className="product container mt-5">
             <div className="row">

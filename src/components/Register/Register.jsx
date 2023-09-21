@@ -23,11 +23,10 @@ function Register() {
     const handleRegister = async (event) => {
         event.preventDefault();        
         try {
-            const response = await axios.post(`${API_BASE_URL}/api/user/register`, formData);
-            const token = response.data;
-            setRegistrationMessage("Se ha registrado con éxito. Para iniciar sesión, confirme en el correo que se ha enviado.");
+            await axios.post(`${API_BASE_URL}/api/user/register`, formData);
+            setRegistrationMessage("Your account has been saved. Check your email address.");
         } catch (error) {
-            console.error("Hubo un error en el registro:", error.response.data);
+            console.error("Error:", error.response.data);
         }
     };
 

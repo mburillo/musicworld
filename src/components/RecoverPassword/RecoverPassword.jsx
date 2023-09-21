@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import UseGuestRoute from '../../routes/UseGuestRoute';
 
@@ -28,7 +28,7 @@ const RecoverPassword = () => {
         };
         
         verify();
-    }, [token]);
+    }, [token, API_BASE_URL]);
 
     if (loading) {
         return <div>Verifying...</div>;

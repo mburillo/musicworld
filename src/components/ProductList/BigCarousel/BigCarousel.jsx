@@ -1,9 +1,4 @@
-import { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import Card from 'react-bootstrap/Card';
-import { ReactComponent as RightArrow } from '../../../assets/images/right-arrow.svg';
-import { ReactComponent as LeftArrow } from '../../../assets/images/left-arrow.svg';
-import axios from 'axios';
 function BigCarousel({carouselData}) {
 
     return (

@@ -4,7 +4,9 @@ import { useLocation } from 'react-router-dom';
 import PaymentForm from './CreditCardForm/PaymentForm';
 import axios from 'axios';
 import { CartContext } from '../Context/CartContext';
+import UseProtectedRoute from '../../routes/UseProtectedRoute';
 const ProcessPayment = () => {
+    UseProtectedRoute();
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL; 
     const [addressInfo, setAddressInfo] = useState({});
     const [saveAddress, setSaveAddress] = useState(false);

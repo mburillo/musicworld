@@ -135,7 +135,7 @@ function AddProducts() {
             }
         };
         fetchProductData();
-    }, []);
+    }, [API_BASE_URL]);
 
     return (
         <div className="container mt-5">

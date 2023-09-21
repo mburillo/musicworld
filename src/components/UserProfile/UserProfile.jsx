@@ -28,7 +28,7 @@ function UserProfile() {
             }
         };
         fetchUserData();
-    }, []);
+    }, [API_BASE_URL]);
     const renderView = () => {
         switch (view) {
             case 'orders':
